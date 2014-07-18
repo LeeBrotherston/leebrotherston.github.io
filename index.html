@@ -7,7 +7,7 @@
 	<meta name="author" content="Lee Brotherson">
 
 	
-	<meta name="description" content="I was meant to start this blog with a post about my ISP, about how they had man in the middle&rsquo;d my connection and how I had been working out &hellip;">
+	<meta name="description" content="A couple of days ago I tweeted this: I&#39;m pretty sure when your EULA prohibits reverse engineering your software, all you prevent is people &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -28,6 +28,72 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 					
+
+
+    <article class="post">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-18T09:55:44-04:00" pubdate data-updated="true">Jul 18<span>th</span>, 2014</time></div>
+		
+	</div>
+	<h1 class="title"><a href="/blog/2014/07/18/is-your-eula-lowering-your-application-security/">Is Your EULA Lowering Your Application Security?</a></h1>
+	<div class="entry-content">
+		<p>A couple of days ago I tweeted this:</p>
+
+<center>
+<blockquote class="twitter-tweet" lang="en"><p>I&#39;m pretty sure when your EULA prohibits reverse engineering your software, all you prevent is people telling you that they reversed it.</p>&mdash; leE Brotherston (@leEb_public) <a href="https://twitter.com/leEb_public/statuses/489050821649506304">July 15, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center>
+
+
+<p>Quite a lot of people agreed (at the time of writing it has 40 retweets and 19 favourites, which is quite a lot for me), so I thought that I would expand and explain this in a little more detail.</p>
+
+<p>The End User Licence Agreement (EULA) is something which is fairly common inclusion in commercial applications, and is typically something dreamed up by the legal team to attempt to enforce whatever it is that they feel needs to be added as part of the licencing agreement.  What prompted my particular comment was something I noticed in the EULA of an application I was using, which prohibited the user from being able to:</p>
+
+<blockquote><p>&#8220;copy, distribute, publish, reverse engineer, decompile, disassemble, modify, or translate the Software&#8221;</p></blockquote>
+
+
+<p>A <a href="https://duckduckgo.com/?q=%22copy%2C+distribute%2C+publish%2C+reverse+engineer%2C+decompile%2C+disassemble%2C+modify%2C+or+translate+the+Software%22">quick search</a> seems to indicate that this is a fairly common clause in a number of EULAs, particularly in the world of gambling (maybe they all use the same template or legal team).</p>
+
+<p>My assumption is that this clause is included in order to prevent people from creating clone clients, perhaps ones which automate gamble, card play or to launder money via online casinos or perhaps just an attempt to hide flaws in the application stack somewhere.</p>
+
+<p>Some initial thoughts:</p>
+
+<ul>
+<li>People who are willing to use an application or service for fraudulent means are probably committing crimes such as fraud in the process.  It&#8217;s unlikely that breaking the terms of the EULA will weigh hevaily on their minds as a deterrent.</li>
+<li>If people are not comitting a crime like fraud or laundering, but are using tools to game the system, I&#8217;m going to wager (pun intended) that they too are not worried about breaking an EULA.</li>
+<li>People who are seeking to exploit the system in some way, by reverse engineering the application will, go on take a guess&#8230;.. probably not care about the EULA</li>
+</ul>
+
+
+<p>However&hellip;</p>
+
+<p>Security researchers, for example, are likely to be dissuaded from taking a closer look at your application by an EULA, but they are the very people that you do not want to be dissuaded.  You want these people to find the problems and report them to you responsibly and privately.  In the perfect world you would have a bug bounty program like <a href="https://www.etsy.com/ca/help/article/2463">Etsy</a>, <a href="https://www.facebook.com/whitehat">Facebook</a> or <a href="http://technet.microsoft.com/en-us/security/dn425036">Microsoft</a>.  But even without a formal bug bounty program in place, dissuading researchers could well lower your security posture as they will not be able to go looking for the bugs that you probably want/need finding and fixing, and even if they do decide to look, you have just cut off their only option to report it to you responsibly.  Instead, as <a href="https://twitter.com/essobi">@esSOBI</a> rightly points out:</p>
+
+<center>
+<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/leEb_public">@leEb_public</a> <a href="https://twitter.com/thegrugq">@thegrugq</a> &#10;Do you want to wind up on pastebin? Cause that&#39;s how you wind up on pastebin.</p>&mdash; esSOBi (@essobi) <a href="https://twitter.com/essobi/statuses/489109019878248448">July 15, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center>
+
+
+<p>So, revisit your EULA, it might be detremental to your application security.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post">

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[SquareLemon]]></title>
-  <link href="http://blog.squarelemon.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: InfoSec, | SquareLemon]]></title>
+  <link href="http://blog.squarelemon.com/blog/categories/infosec/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
   <updated>2014-07-18T15:39:19-04:00</updated>
   <id>http://blog.squarelemon.com/</id>
@@ -30,8 +30,7 @@
 
 <p>The End User Licence Agreement (EULA) is something which is fairly common inclusion in commercial applications, and is typically something dreamed up by the legal team to attempt to enforce whatever it is that they feel needs to be added as part of the licencing agreement.  What prompted my particular comment was something I noticed in the EULA of an application I was using, which prohibited the user from being able to:</p>
 
-<blockquote><p>&#8220;copy, distribute, publish, reverse engineer, decompile, disassemble, modify, or translate the Software&#8221;</p></blockquote>
-
+<p><blockquote><p>&ldquo;copy, distribute, publish, reverse engineer, decompile, disassemble, modify, or translate the Software&rdquo;</p></blockquote></p>
 
 <p>A <a href="https://duckduckgo.com/?q=%22copy%2C+distribute%2C+publish%2C+reverse+engineer%2C+decompile%2C+disassemble%2C+modify%2C+or+translate+the+Software%22">quick search</a> seems to indicate that this is a fairly common clause in a number of EULAs, particularly in the world of gambling (maybe they all use the same template or legal team).</p>
 
@@ -40,9 +39,9 @@
 <p>Some initial thoughts:</p>
 
 <ul>
-<li>People who are willing to use an application or service for fraudulent means are probably committing crimes such as fraud in the process.  It&#8217;s unlikely that breaking the terms of the EULA will weigh hevaily on their minds as a deterrent.</li>
-<li>If people are not comitting a crime like fraud or laundering, but are using tools to game the system, I&#8217;m going to wager (pun intended) that they too are not worried about breaking an EULA.</li>
-<li>People who are seeking to exploit the system in some way, by reverse engineering the application will, go on take a guess&#8230;.. probably not care about the EULA</li>
+<li>People who are willing to use an application or service for fraudulent means are probably committing crimes such as fraud in the process.  It's unlikely that breaking the terms of the EULA will weigh hevaily on their minds as a deterrent.</li>
+<li>If people are not comitting a crime like fraud or laundering, but are using tools to game the system, I'm going to wager (pun intended) that they too are not worried about breaking an EULA.</li>
+<li>People who are seeking to exploit the system in some way, by reverse engineering the application will, go on take a guess..... probably not care about the EULA</li>
 </ul>
 
 
@@ -57,21 +56,6 @@
 
 
 <p>So, revisit your EULA, it might be detremental to your application security.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SecTor 2014]]></title>
-    <link href="http://blog.squarelemon.com/blog/2014/05/24/sector-2014/"/>
-    <updated>2014-05-24T23:42:56-04:00</updated>
-    <id>http://blog.squarelemon.com/blog/2014/05/24/sector-2014</id>
-    <content type="html"><![CDATA[<p>I was meant to start this blog with a post about my ISP, about how they had man in the middle&rsquo;d my connection and how I had been working out the details of why they had been doing this, how they achieved it and how I uncovered what they had been up to.</p>
-
-<p>Since I started writing that post the topic has grown somewhat and now I have been confirmed as a <a href="http://sector.ca/Program/Sessions/Session-Details/evl/0/tag/16752/Lee-Brotherston">speaker at SecTor 2014</a> in Toronto.</p>
-
-<p>So, the post is still coming&hellip;  But if you want to see me explain it in as much Powerpoint glory as I can muster, come on down to SecTor later this year :)</p>
-
-<p>Edit: If you want a 10% discount on full conference entry use the code: SecTorSpeaker2014</p>
 ]]></content>
   </entry>
   
