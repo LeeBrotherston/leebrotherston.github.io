@@ -4,7 +4,7 @@
   <title><![CDATA[Category: InfoSec, | SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/blog/categories/infosec/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2014-07-21T10:17:12-04:00</updated>
+  <updated>2014-07-21T10:19:51-04:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -44,7 +44,7 @@
 
 <p>However&hellip;</p>
 
-<p>Security researchers, for example, <b>are</b> likely to be dissuaded from taking a closer look at an application by a restrictive EULA, but they are the very people that we do not want to be dissuaded.  We want these people to find the problems and report them responsibly.  In a perfect world you would have a bug bounty program like those at <a href="https://www.etsy.com/ca/help/article/2463">Etsy</a>, <a href="https://www.facebook.com/whitehat">Facebook</a> and <a href="http://technet.microsoft.com/en-us/security/dn425036">Microsoft</a>.  But even without a formal bug bounty program in place, dissuading researchers via the EULA could well lower your security posture.  Chances are that a resrictive EULA has just cut off their only option to report it to you responsibly without fear of some knee-jerk legal retaliation.  Instead, as <a href="https://twitter.com/essobi">@esSOBI</a> rightly points out:</p>
+<p>Security researchers, for example, <b>are</b> likely to be dissuaded from taking a closer look at an application by a restrictive EULA, but they are the very people that we do not want to be dissuaded.  We want these people to find the problems and report them responsibly.  In a perfect world you would have a bug bounty program like those at <a href="https://www.etsy.com/ca/help/article/2463">Etsy</a>, <a href="https://www.facebook.com/whitehat">Facebook</a> and <a href="http://technet.microsoft.com/en-us/security/dn425036">Microsoft</a> to incentivize people to disclose bugs early and often.  But even without a formal bug bounty program in place dissuading researchers via the EULA could well lower your security posture.  Chances are that a resrictive EULA has just cut off their only option to report it to you responsibly without fear of some knee-jerk legal retaliation.  Instead, as <a href="https://twitter.com/essobi">@esSOBI</a> rightly points out:</p>
 
 <center>
 <blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/leEb_public">@leEb_public</a> <a href="https://twitter.com/thegrugq">@thegrugq</a> &#10;Do you want to wind up on pastebin? Cause that&#39;s how you wind up on pastebin.</p>&mdash; esSOBi (@essobi) <a href="https://twitter.com/essobi/statuses/489109019878248448">July 15, 2014</a></blockquote>
