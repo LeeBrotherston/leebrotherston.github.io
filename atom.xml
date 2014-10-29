@@ -4,7 +4,7 @@
   <title><![CDATA[SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2014-10-29T13:06:44-04:00</updated>
+  <updated>2014-10-29T13:11:07-04:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Corporation In The Middle]]></title>
-    <link href="http://blog.squarelemon.com/blog/2014/10/21/corporation-in-the-middle/"/>
-    <updated>2014-10-21T22:59:58-04:00</updated>
-    <id>http://blog.squarelemon.com/blog/2014/10/21/corporation-in-the-middle</id>
+    <link href="http://blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle/"/>
+    <updated>2014-10-29T22:59:58-04:00</updated>
+    <id>http://blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle</id>
     <content type="html"><![CDATA[<p>A few days ago I presented my talk, &ldquo;Corporation In The Middle&rdquo; at <a href="http://sector.ca">SecTor 2014</a>.  I will be presenting an updated and truncated version of the talk at <a href="http://www.bsidesto.ca/">BSides Toronto</a> in November of this year.</p>
 
 <p>If you are interested in seeing the talk you can do so here:</p>
