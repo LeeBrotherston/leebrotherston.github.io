@@ -4,7 +4,7 @@
   <title><![CDATA[SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2014-10-29T13:11:07-04:00</updated>
+  <updated>2014-12-29T11:58:51-05:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[BSides Toronto Video &amp; Slides]]></title>
+    <link href="http://blog.squarelemon.com/blog/2014/12/24/bsides-toronto-video-and-slides/"/>
+    <updated>2014-12-24T13:54:36-05:00</updated>
+    <id>http://blog.squarelemon.com/blog/2014/12/24/bsides-toronto-video-and-slides</id>
+    <content type="html"><![CDATA[<p>At the end of November I gave my talk, &ldquo;Corporation In The Middle [BSidesTO Edition]&rdquo; at <a href="http://bsidesto.ca">BSides Toronto 2014</a>.</p>
+
+<br />
+
+
+<p>The recording of the talk is now online and available here:<br /></p>
+
+<iframe width="560" height="315" src="http://blog.squarelemon.com//www.youtube.com/embed/_YeaYIPM-QI" frameborder="0" allowfullscreen></iframe>
+
+
+<br />
+
+
+<p>You can play along at home with the slides, here:<br /></p>
+
+<iframe src="http://blog.squarelemon.com//www.slideshare.net/slideshow/embed_code/41918170" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p> <div style="margin-bottom:5px"> <strong> <a href="http://blog.squarelemon.com//www.slideshare.net/LeeBrotherston/corporation-in-the-middle-bsidesto-edition" title="Corporation In The Middle - BSidesTO Edition" target="_blank">Corporation In The Middle &ndash; BSidesTO Edition</a> </strong> from <strong><a href="http://blog.squarelemon.com//www.slideshare.net/LeeBrotherston" target="_blank">Lee Brotherston</a></strong> </div></p>
+
+<br />
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Corporation In The Middle]]></title>
