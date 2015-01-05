@@ -4,7 +4,7 @@
   <title><![CDATA[SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-01-05T00:08:45-05:00</updated>
+  <updated>2015-01-05T00:36:22-05:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -53,9 +53,9 @@
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>X-Cache: MISS from 172.19.134.2&lt;br />
-</span><span class='line'>X-Cache-Lookup: MISS from 172.19.134.2:3128&lt;br />
-</span><span class='line'>Via: 1.0 172.19.134.2:3128 (squid/2.6.STABLE14)&lt;br /></span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>X-Cache: MISS from 172.19.134.2
+</span><span class='line'>X-Cache-Lookup: MISS from 172.19.134.2:3128
+</span><span class='line'>Via: 1.0 172.19.134.2:3128 (squid/2.6.STABLE14)</span></code></pre></td></tr></table></div></figure>
 
 
 
