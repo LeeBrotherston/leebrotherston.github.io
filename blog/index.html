@@ -75,36 +75,9 @@
 <br />
 
 
-<p>I started to wonder if they were using the same technique that I had recently been researching and discussing in my <a href="http://blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle/">Corporation in The Middle</a> talk.  Luckily for me, my friend <a href="https://twitter.com/benjammingh/">Benjammingh</a> was one of those who noticed and was currently on a Gogo flight, so I asked him to take a packetdump for analysis.<br /><br /></p>
-
-<p>The short summary is that this is not the same technique, in fact this looks like in-flight transparent proxying&hellip;.<br /><br /></p>
-
-<p>For one thing there is this giveaway in the http response header:<br /></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>X-Cache: MISS from 172.19.134.2
-</span><span class='line'>X-Cache-Lookup: MISS from 172.19.134.2:3128
-</span><span class='line'>Via: 1.0 172.19.134.2:3128 (squid/2.6.STABLE14)</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<br />
-
-
-<p>This is indeed squid, quite an old install of squid, on the default port.<br /><br /></p>
-
-<p>Secondly, the TTL on all the packets was 64.  Now, most OS&rsquo;s tend to use round numbers for default TTL values (32, 64, 128).  Assuming this to be the case, this would indicate that either YouTube is exactly 64 hops away or the packets are originating from the local network segment, which would be consistent with a local (transparent) proxy.</p>
-
-<br />
-
-
-<p>It&rsquo;s hardly an in-depth analysis, but at this point it seems to be more than we have at the minute, and it would explain how they are Man in The Middle&#8217;ing the connection, the question still remains&hellip;. why?</p>
-
+<p>I started to wonder if they were using the same technique that I had recently been researching and discussing in my <a href="http://blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle/">Corporation in The Middle</a> talk.  Luckily for me, my friend <a href="https://twitter.com/benjammingh/">Benjammingh</a> was one of those who noticed and was currently on a Gogo flight, so I asked him to take a packetdump for analysis.<br /><br />
 		
-		
+		<a href="/blog/2015/01/04/mitm-at-30/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -136,30 +109,9 @@
 <br />
 
 
-<p>I got a fairly standard response which said that they did not collect any such data, to which I replied:</p>
-
-<br />
-
-
-<blockquote><p>Hi,</p><p>I recently sent a letter to you asking for details of data that Rogers hold on me as required by PIPEDA.  As expected you, or someone in your department, kindly replied.  Thank you!</p><p>Most of it made sense however I did note that there was one area in particular that is inaccurate/untrue, specifically your statement &#8220;We do not collect the IP addresses or the domain names of the sites that you have visited or the time, dates and port numbers&#8221;.  I understand it is entirely possible that this was not deliberate and it&#8217;s more likely that you are unaware of some of the data that Rogers holds, nonetheless I thought that I should mention this so that this mistake is not replicated in the future placing you in breach of PIPEDA.</p><p>To provide you some insight, when you insert consumer messaging into webpages, such as the &#8220;you have exceeded 75% of your bandwidth allowance&#8230;&#8221; message, you use a system called the Bulletin System manufactured by Perftech to do so.  Putting aside the legality of this tool (I believe this breaks the Telecommunications Act) for a moment, you should note that this tool tracks user web browsing behavior (other than encrypted sessions) and keeps a history of the past 30 days tied to user account, irrespective of if that user is receiving any messaging at the time or not.</p><p>If it helps you to track down this system, one of it&#8217;s nodes (REDACTED) is currently live on the IP REDACTED within your network.</p><p>If you would like further information on this I have a sizeable amount of documentation and evidence to support this.</p><p>Please feel free to come back to me if you have any questions or queries.</p><p>Thanks</p><p>Lee</p></blockquote>
-
-
-
-
-<br /><br />
-
-
-<p>Their response?<br /><br /></p>
-
-<p><img src="/images/corp_in_the_middle/rogers_letter_update.jpeg"></p>
-
-<br /><br />
-
-
-<p>I don&rsquo;t feel that this is going to progress anytime soon.</p>
-
+<p>I got a fairly standard response which said that they did not collect any such data, to which I replied:
 		
-		
+		<a href="/blog/2015/01/02/no-we-dont/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -286,37 +238,9 @@
 </center>
 
 
-<p>Quite a lot of people agreed (at the time of writing it has 40 retweets and 19 favourites, which is quite a lot for me), so I thought that I would expand and explain this in a little more detail.</p>
-
-<p>The End User Licence Agreement (EULA) is something which is fairly common inclusion in commercial applications, and is typically something dreamed up by the legal team to attempt to enforce whatever it is that they feel needs to be added as part of the licencing agreement.  What prompted my particular comment was something I noticed in the EULA of an application I was using, which prohibited the user from being able to:</p>
-
-<blockquote><p>&#8220;copy, distribute, publish, reverse engineer, decompile, disassemble, modify, or translate the Software&#8221;</p></blockquote>
-
-
-<p>A <a href="https://duckduckgo.com/?q=%22copy%2C+distribute%2C+publish%2C+reverse+engineer%2C+decompile%2C+disassemble%2C+modify%2C+or+translate+the+Software%22">quick search</a> seems to indicate that this is a fairly common clause in a number of EULAs, particularly in the world of gambling (maybe they all use the same template or legal team).</p>
-
-<p>My assumption is that this clause is included in order to prevent people from creating clone clients, perhaps ones which automate betting and casino style gambling, laundering via robot card games or perhaps just an attempt to hide flaws in the application stack somewhere.</p>
-
-<p>My initial thought was merely that this would not prevent anyone with ill intentions from reversing the code.  People who are willing to use an application or service for fraudulent means are probably committing crimes such as fraud in the process, if they&rsquo;re able to accept that I don&rsquo;t believe that a licence violation will be a massive disincentive.</p>
-
-<p>Similarly if people are not comitting a crime like fraud or money laundering, but are using automated tools to game the system by autmatically playing low-winning games for hours on end, for example, probably don&rsquo;t care about the EULA too much.</p>
-
-<p>Finally, those who are seeking to reverse engineer the code to find exploits and attack the system in some way (ok this is also crime, but a different type) probably will not care about the EULA.</p>
-
-<p>However&hellip;</p>
-
-<p>Security researchers, for example, <b>are</b> likely to be dissuaded from taking a closer look at an application by a restrictive EULA, but they are the very people that we do not want to be dissuaded.  We want these people to find the problems and report them responsibly.  In a perfect world you would have a bug bounty program like those at <a href="https://www.etsy.com/ca/help/article/2463">Etsy</a>, <a href="https://www.facebook.com/whitehat">Facebook</a> and <a href="http://technet.microsoft.com/en-us/security/dn425036">Microsoft</a> to incentivize people to disclose bugs early and often.  But even without a formal bug bounty program in place dissuading researchers via the EULA could well lower your security posture.  Chances are that a resrictive EULA has just cut off their only option to report it to you responsibly without fear of some knee-jerk legal retaliation.  Instead, as <a href="https://twitter.com/essobi">@esSOBI</a> rightly points out:</p>
-
-<center>
-<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/leEb_public">@leEb_public</a> <a href="https://twitter.com/thegrugq">@thegrugq</a> &#10;Do you want to wind up on pastebin? Cause that&#39;s how you wind up on pastebin.</p>&mdash; esSOBi (@essobi) <a href="https://twitter.com/essobi/statuses/489109019878248448">July 15, 2014</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-</center>
-
-
-<p>Perhaps it&rsquo;s time Information Security people engaged with Legal instead of dismissing the EULA on your product as &ldquo;business stuff&rdquo; and make sure that it isn&rsquo;t damaging your chances at a more secure product.</p>
-
+<p>Quite a lot of people agreed (at the time of writing it has 40 retweets and 19 favourites, which is quite a lot for me), so I thought that I would expand and explain this in a little more detail.
 		
-		
+		<a href="/blog/2014/07/18/is-your-eula-lowering-your-application-security/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

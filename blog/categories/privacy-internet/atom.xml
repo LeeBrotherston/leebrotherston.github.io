@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Privacy,Internet | SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/blog/categories/privacy-internet/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-01-05T00:36:22-05:00</updated>
+  <updated>2015-01-07T13:04:49-05:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -44,7 +44,7 @@
 <br />
 
 
-<p>I started to wonder if they were using the same technique that I had recently been researching and discussing in my <a href="http://blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle/">Corporation in The Middle</a> talk.  Luckily for me, my friend <a href="https://twitter.com/benjammingh/">Benjammingh</a> was one of those who noticed and was currently on a Gogo flight, so I asked him to take a packetdump for analysis.<br /><br /></p>
+<p>I started to wonder if they were using the same technique that I had recently been researching and discussing in my <a href="http://blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle/">Corporation in The Middle</a> talk.  Luckily for me, my friend <a href="https://twitter.com/benjammingh/">Benjammingh</a> was one of those who noticed and was currently on a Gogo flight, so I asked him to take a packetdump for analysis.<br /><br /><!-- More --></p>
 
 <p>The short summary is that this is not the same technique, in fact this looks like in-flight transparent proxying&hellip;.<br /><br /></p>
 
