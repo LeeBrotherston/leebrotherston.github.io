@@ -4,7 +4,7 @@
   <title><![CDATA[SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-01-27T09:45:21-05:00</updated>
+  <updated>2015-01-27T09:50:12-05:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -31,20 +31,11 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[OS X Sandbox QuickStart]]></title>
-    <link href="http://blog.squarelemon.com/blog/2015/01/20/os-x-sandbox-quickstart/"/>
-    <updated>2015-01-20T10:30:14-05:00</updated>
-    <id>http://blog.squarelemon.com/blog/2015/01/20/os-x-sandbox-quickstart</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[MiTM at 30,000 feet]]></title>
     <link href="http://blog.squarelemon.com/blog/2015/01/04/mitm-at-30/"/>
     <updated>2015-01-04T23:38:11-05:00</updated>
     <id>http://blog.squarelemon.com/blog/2015/01/04/mitm-at-30</id>
-    <content type="html"><![CDATA[<p>In the past week I have seen a few mentions on twitter regarding <a href="http://twitter.com/gogo">Gogo Air</a> presenting fake SSL certs for YouTube to users of their in air Internet access service:<br /></p>
+    <content type="html"><![CDATA[<p>In the past week I have seen a few mentions on twitter regarding <a href="http://twitter.com/gogo">Gogo Air</a> presenting fake SSL certs for YouTube to users of their in air Internet access service:<br /><!-- More --></p>
 
 <blockquote class="twitter-tweet" lang="en"><p>hey <a href="https://twitter.com/Gogo">@Gogo</a>, why are you issuing *.google.com certificates on your planes? <a href="http://t.co/UmpIQ2pDaU">pic.twitter.com/UmpIQ2pDaU</a></p>&mdash; Adrienne Porter Felt (@__apf__) <a href="https://twitter.com/__apf__/status/551083956326920192">January 2, 2015</a></blockquote>
 
