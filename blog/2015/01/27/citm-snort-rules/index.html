@@ -1,0 +1,90 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Snort Rules - CitM - SquareLemon</title>
+	<meta name="author" content="Lee Brotherson">
+
+	
+	<meta name="description" content="Last year I gave my Corporation In The Middle talk in which I explained how my ISP has been man-in-the-middle&#8217;ing my connection to inject a &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="SquareLemon" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+	<div class="container">	
+
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+					<article class="post">
+	<h1 class="title">Snort Rules - CitM</h1>
+	<div class="entry-content"><p>Last year I gave my Corporation In The Middle talk in which I explained how my ISP has been man-in-the-middle&#8217;ing my connection to inject a warning banner into the top of webpages I visited (talk content <a href="blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle/">here</a> and <a href="http://blog.squarelemon.com/blog/2014/12/29/bsides-toronto-video-and-slides/">here</a>).</p>
+
+<p>Part of this involved traffic analysis to discover artifacts of the injection process.  In an effort to make this process more automated, repeatable and accessible I have put together a few snort rules to allow others to alert on this condition:<br /></p>
+
+<p><a href="https://github.com/LeeBrotherston/snort"><a href="https://github.com/LeeBrotherston/snort">https://github.com/LeeBrotherston/snort</a></a><br /></p>
+
+<p>One rule is commented out as it is noisy and prone to false positives, however I have included it (disabled) for now, for reference.  The other three rules have been tested by me on my personal environment and seem to be free from false positives, however this is only a limited test and so feedback would be really appreciated from anyone running them elsewhere.<br /></p>
+
+<p>Of course these are far from complete in terms of detection of man in the middle generically, they only pertain to the specific technique outlined in my talk, however I will endeavour to update them as I obtain further information.</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<!-- <a class="addthis_counter addthis_pill_style"></a> -->
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+				</div>
+			</div>
+			<footer id="footer" class="inner">
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> - 
+
+    <a href="/about">Lee Brotherson</a>
+ |
+</footer>
+			<script src="/javascripts/slash.js"></script>
+
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-54930700-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+	</div>
+</body>
+</html>
