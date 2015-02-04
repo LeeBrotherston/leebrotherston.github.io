@@ -4,7 +4,7 @@
   <title><![CDATA[SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-02-04T11:14:42-05:00</updated>
+  <updated>2015-02-04T11:31:56-05:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Press Page]]></title>
+    <link href="http://blog.squarelemon.com/blog/2015/02/04/press-page/"/>
+    <updated>2015-02-04T11:28:07-05:00</updated>
+    <id>http://blog.squarelemon.com/blog/2015/02/04/press-page</id>
+    <content type="html"><![CDATA[<p>Last year I would have never anticipated being quoted in the press, however it has happened a couple of times recently.  To keep track of this I have added a <a href="http://blog.squarelemon.com/press/">press page</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Snort Rules - CitM]]></title>
