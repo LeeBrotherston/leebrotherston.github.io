@@ -4,7 +4,7 @@
   <title><![CDATA[SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-02-04T11:32:53-05:00</updated>
+  <updated>2015-02-04T13:23:55-05:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Brakeing Down Security Podcast - Threat Modeling]]></title>
+    <link href="http://blog.squarelemon.com/blog/2015/02/04/brakeing-down-security-podcast-threat-modeling/"/>
+    <updated>2015-02-04T13:17:01-05:00</updated>
+    <id>http://blog.squarelemon.com/blog/2015/02/04/brakeing-down-security-podcast-threat-modeling</id>
+    <content type="html"><![CDATA[<p>This week I was lucky enough to be a guest on the <a href="http://brakeingsecurity.blogspot.ca/">Brakeing Down Security podcast</a>, the specific episode is available <a href="http://brakeingsecurity.blogspot.ca/2015/01/2015-005-threat-modeling-with-lee.html">here</a>, or you can subscribe to the podcast <a href="https://itunes.apple.com/us/podcast/brakeing-down-security-podcast/id799131292?mt=2">here</a>.</p>
+
+<br />
+
+
+<p>Thanks to <a href="https://twitter.com/bryanbrake">Bryan</a> and <a href="https://twitter.com/boettcherpwned">Brian</a> for having me :)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Press Page]]></title>
