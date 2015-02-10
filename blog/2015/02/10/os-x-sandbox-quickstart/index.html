@@ -1,0 +1,112 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>OS X Sandbox QuickStart - SquareLemon</title>
+	<meta name="author" content="Lee Brotherson">
+
+	
+	<meta name="description" content="The sandbox feature on OS X is really useful for restricting what applications have access to in more granular and controlled fashion than standard &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="SquareLemon" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+	<div class="container">	
+
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+					<article class="post">
+	<h1 class="title">OS X Sandbox QuickStart</h1>
+	<div class="entry-content"><p>The <a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/sandbox-exec.1.html">sandbox feature on OS X</a> is really useful for restricting what applications have access to in more granular and controlled fashion than standard file permissions allow.  However writing the initial sandbox profile can be problematic for many users, it&rsquo;s not always clear what an application needs access to in order to operate in the expected way; there are a number of system files, libraries and such like, that an application quite rightly needs to read.</p>
+
+<p>The news is not all bad, there are some really useful commands built in to OS X which can help.<!-- More --></p>
+
+<p>Working on the assumption that the threat model that we are protecting against is an application being exploited via a vulnerability or such like (rather than this being a malicious app out of the box), we can run the application without restrictions initially all the while logging which it accesses.  To do this we create a nearly blank sandbox profile which does nothing but log:</p>
+
+<blockquote><p>(version 1)<br/>(trace &#8220;/tmp/trace_output.sb&#8221;)</p></blockquote>
+
+
+<p>Next we can run our application via sandbox-exec using this sandbox profile:</p>
+
+<blockquote><p>sandbox-exec -f ./trace.sb /Applications/SomeApplication.app/Contents/MacOS/SomeApplication</p></blockquote>
+
+
+<p>The application will run slowly, it is after all tracing (logging) every access to a file along with the type of access (read, write, read/write, read metadata, etc) along with other information like accesses to sysctl variables.  This will generate the file /tmp/trace_output.sb which is a working, though huge and inelegant, sandbox profile.  Simply running vim (without even opening a file) will create a 238 line profile (imagine what a browser does).  This can easily be trimmed by sandbox-simplify:</p>
+
+<blockquote><p>sandbox-simplify /tmp/trace_output.sb > ./tracesimple.sb</p></blockquote>
+
+
+<p>What this essentially does is the sandbox profile equivalent of sort | uniq and then groups the output to be a little easier to read.  This takes the sample vim profile down to 41 lines from the 238 lines it was before.</p>
+
+<p>Let&rsquo;s test if that worked:</p>
+
+<blockquote><p>sandbox-exec -f tracesimple.sb /Applications/SomeApplication.app/Contents/MacOS/SomeApplication</p></blockquote>
+
+
+<p>The application should now run as expected but have access to nothing outside of what was specified in the sandbox profile.  In the case of the vim example, the code runs as expected but has no permission to open any documents (try opening a file); we have sandboxing \o/</p>
+
+<p>Of course running an application which cannot interact with the filesystem may not be entirely useful, especially for a tool such as vim.  At this point we can begin manually editing the sandbox profile.  We can add additional permissions that we wish to use to ensure that the application can open files that we want it to.  The system has a selection of example profile that you may wish to borrow from in <i>/System/Library/Sandbox/Profiles/</i> alternatively I found <a href="http://reverse.put.as/wp-content/uploads/2011/09/Apple-Sandbox-Guide-v1.0.pdf">this guide</a> really useful.</p>
+
+<p>Of course you may wish to tweak or debug permissions further, this is easy, just add <i>(trace &ldquo;/tmp/trace_output.sb&rdquo;)</i> to your sandbox profile as we did at the start and you will create a trace file for any additional permissions which may be required.  Enjoy!</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<!-- <a class="addthis_counter addthis_pill_style"></a> -->
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+				</div>
+			</div>
+			<footer id="footer" class="inner">
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> - 
+
+    <a href="/about">Lee Brotherson</a>
+ |
+</footer>
+			<script src="/javascripts/slash.js"></script>
+
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-54930700-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+	</div>
+</body>
+</html>
