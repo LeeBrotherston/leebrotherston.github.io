@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: osx,security | SquareLemon]]></title>
-  <link href="http://blog.squarelemon.com/blog/categories/osx-security/atom.xml" rel="self"/>
+  <title><![CDATA[Category: OSX,InfoSec,AppSec | SquareLemon]]></title>
+  <link href="http://blog.squarelemon.com/blog/categories/osx-infosec-appsec/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-02-10T10:26:17-05:00</updated>
+  <updated>2015-02-11T13:53:15-05:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
