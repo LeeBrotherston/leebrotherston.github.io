@@ -7,7 +7,7 @@
 	<meta name="author" content="Lee Brotherson">
 
 	
-	<meta name="description" content="With all the talk of Lenovo and Superfish in the press, now seems a good time to mention an update which is personal to me on the topic of Man in &hellip;">
+	<meta name="description" content="Much has been in the press the past couple of days regarding Superfish, specifically being pre-installed on Lenovo hardware, however the issues &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -28,6 +28,51 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 					
+
+
+    <article class="post">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-20T14:53:52-05:00" pubdate data-updated="true">Feb 20<span>th</span>, 2015</time></div>
+		
+	</div>
+	<h1 class="title"><a href="/blog/2015/02/20/superfish-detection/">SuperFish Detection</a></h1>
+	<div class="entry-content">
+		<p>Much has been in the press the past couple of days regarding Superfish, specifically being pre-installed on Lenovo hardware, however the issues discussed are relevant to any device with Superfish installed.  It just so happens that Lenovo made the decision to bundle it up in the factory.</p>
+
+<p>There are a number of write-ups on the technical nature of this malware/adware, and I won&rsquo;t attempt to rehash those, they are most likely better than anything that I could contribute anyway.  I did however want to be able to detect this on the network to offer network administrators a chance to locate devices on their network which may be affected.</p>
+
+<p>By creating <a href="https://blog.filippo.io/make-your-own-superfish-infected-vm/">a Superfish infected VM</a> we can examine how the software works in a relatively controlled fashion.</p>
+
+<p>By using &ldquo;netstat -ano&rdquo; both before and after infection it comes obvious that the browsers are redirected to C:\Program Files\Lenovo\VisualDiscovery\VisualDiscovery.exe which listens locally and then makes its own connection to webservers, essentially proxying the connection and resigning SSL connections back to the browser with &quot;<a href="http://blog.erratasec.com/2015/02/extracting-superfish-certificate.html">That Cert</a>&quot;.  This lead me to believe that SuperFish, or more specifically VisualDiscovery.exe, had it&rsquo;s own SSL client code.  As Rob points out in his <a href="http://blog.erratasec.com/2015/02/extracting-superfish-certificate.html">writeup</a> there are proper ways to examine how this works and ghetto ways&hellip;.  I went ghetto.</p>
+
+<p>We can connect to a collection of HTTPS webservers using Internet Explorer, FireFox and Chrome before infecting the machine, then doing it again after infection and sniff the whole lot.  Next we open up the captures in WireShark and see what&rsquo;s the same, what&rsquo;s different, etc.  I noticed that the browsers favoured TLS1.2 and SuperFish prefers TLS1.1, for example.  However the thing that stood out most was the SuperFish selection of Cipher Suites&hellip;</p>
+
+<blockquote><p>Cipher Suites Length: 104<br/>Cipher Suites (52 suites)<br/>Cipher Suite: TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (0xc014)<br/>Cipher Suite: TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA (0xc00a)<br/>Cipher Suite: TLS_SRP_SHA_DSS_WITH_AES_256_CBC_SHA (0xc022)<br/>Cipher Suite: TLS_SRP_SHA_RSA_WITH_AES_256_CBC_SHA (0xc021)<br/>Cipher Suite: TLS_DHE_RSA_WITH_AES_256_CBC_SHA (0x0039)<br/>Cipher Suite: TLS_DHE_DSS_WITH_AES_256_CBC_SHA (0x0038)<br/>Cipher Suite: TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA (0x0088)<br/>Cipher Suite: TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA (0x0087)<br/>Cipher Suite: TLS_ECDH_RSA_WITH_AES_256_CBC_SHA (0xc00f)<br/>Cipher Suite: TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA (0xc005)<br/>Cipher Suite: TLS_RSA_WITH_AES_256_CBC_SHA (0x0035)<br/>Cipher Suite: TLS_RSA_WITH_CAMELLIA_256_CBC_SHA (0x0084)<br/>Cipher Suite: TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA (0xc012)<br/>Cipher Suite: TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA (0xc008)<br/>Cipher Suite: TLS_SRP_SHA_DSS_WITH_3DES_EDE_CBC_SHA (0xc01c)<br/>Cipher Suite: TLS_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA (0xc01b)<br/>Cipher Suite: TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA (0x0016)<br/>Cipher Suite: TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA (0x0013)<br/>Cipher Suite: TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA (0xc00d)<br/>Cipher Suite: TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA (0xc003)<br/>Cipher Suite: TLS_RSA_WITH_3DES_EDE_CBC_SHA (0x000a)<br/>Cipher Suite: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (0xc013)<br/>Cipher Suite: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA (0xc009)<br/>Cipher Suite: TLS_SRP_SHA_DSS_WITH_AES_128_CBC_SHA (0xc01f)<br/>Cipher Suite: TLS_SRP_SHA_RSA_WITH_AES_128_CBC_SHA (0xc01e)<br/>Cipher Suite: TLS_DHE_RSA_WITH_AES_128_CBC_SHA (0x0033)<br/>Cipher Suite: TLS_DHE_DSS_WITH_AES_128_CBC_SHA (0x0032)<br/>Cipher Suite: TLS_DHE_RSA_WITH_SEED_CBC_SHA (0x009a)<br/>Cipher Suite: TLS_DHE_DSS_WITH_SEED_CBC_SHA (0x0099)<br/>Cipher Suite: TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA (0x0045)<br/>Cipher Suite: TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA (0x0044)<br/>Cipher Suite: TLS_ECDH_RSA_WITH_AES_128_CBC_SHA (0xc00e)<br/>Cipher Suite: TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA (0xc004)<br/>Cipher Suite: TLS_RSA_WITH_AES_128_CBC_SHA (0x002f)<br/>Cipher Suite: TLS_RSA_WITH_SEED_CBC_SHA (0x0096)<br/>Cipher Suite: TLS_RSA_WITH_CAMELLIA_128_CBC_SHA (0x0041)<br/>Cipher Suite: TLS_RSA_WITH_IDEA_CBC_SHA (0x0007)<br/>Cipher Suite: TLS_ECDHE_RSA_WITH_RC4_128_SHA (0xc011)<br/>Cipher Suite: TLS_ECDHE_ECDSA_WITH_RC4_128_SHA (0xc007)<br/>Cipher Suite: TLS_ECDH_RSA_WITH_RC4_128_SHA (0xc00c)<br/>Cipher Suite: TLS_ECDH_ECDSA_WITH_RC4_128_SHA (0xc002)<br/>Cipher Suite: TLS_RSA_WITH_RC4_128_SHA (0x0005)<br/>Cipher Suite: TLS_RSA_WITH_RC4_128_MD5 (0x0004)<br/>Cipher Suite: TLS_DHE_RSA_WITH_DES_CBC_SHA (0x0015)<br/>Cipher Suite: TLS_DHE_DSS_WITH_DES_CBC_SHA (0x0012)<br/>Cipher Suite: TLS_RSA_WITH_DES_CBC_SHA (0x0009)<br/>Cipher Suite: TLS_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA (0x0014)<br/>Cipher Suite: TLS_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA (0x0011)<br/>Cipher Suite: TLS_RSA_EXPORT_WITH_DES40_CBC_SHA (0x0008)<br/>Cipher Suite: TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5 (0x0006)<br/>Cipher Suite: TLS_RSA_EXPORT_WITH_RC4_40_MD5 (0x0003)<br/>Cipher Suite: TLS_EMPTY_RENEGOTIATION_INFO_SCSV (0x00ff)</p></blockquote>
+
+
+<p>So, I have added this as a signature to my <a href="https://github.com/LeeBrotherston/snort/blob/master/snort_interception.rules">snort rules for interception (MiTM) detection</a>.  These rules also include detection for the appliances discovered during my <a href="http://blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle/">Corporation in The Middle</a> talk, however if you are only interested in SuperFish you want rule sid:1000004.</p>
+
+<p>If anyone has luck, epic failure or anything else I would be really interested in hearing more from you.  I&rsquo;m <a href="http://twitter.com/synackpse/">@SynAckPse</a> on twitter.</p>
+
+<p>Enjoy!</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post">
@@ -305,55 +350,6 @@
 <p>I got a fairly standard response which said that they did not collect any such data, to which I replied:
 		
 		<a href="/blog/2015/01/02/no-we-dont/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-12-29T11:59:00-05:00" pubdate data-updated="true">Dec 29<span>th</span>, 2014</time></div>
-		
-	</div>
-	<h1 class="title"><a href="/blog/2014/12/29/bsides-toronto-video-and-slides/">BSides Toronto Video &amp; Slides</a></h1>
-	<div class="entry-content">
-		<p>At the end of November I gave my talk, &ldquo;Corporation In The Middle [BSidesTO Edition]&rdquo; at <a href="http://bsidesto.ca">BSides Toronto 2014</a>.</p>
-
-<br />
-
-
-<p>The recording of the talk is now online and available here:<br /></p>
-
-<iframe width="560" height="315" src="//www.youtube.com/embed/_YeaYIPM-QI" frameborder="0" allowfullscreen></iframe>
-
-
-<br />
-
-
-<p>You can play along at home with the slides, here:<br /></p>
-
-<iframe src="//www.slideshare.net/slideshow/embed_code/41918170" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-
-
-<p> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/LeeBrotherston/corporation-in-the-middle-bsidesto-edition" title="Corporation In The Middle - BSidesTO Edition" target="_blank">Corporation In The Middle &ndash; BSidesTO Edition</a> </strong> from <strong><a href="//www.slideshare.net/LeeBrotherston" target="_blank">Lee Brotherston</a></strong> </div></p>
-
-<br />
-
-
-		
-		
 	</div>
 
 </article>
