@@ -33,7 +33,7 @@
 
 <p>There are a number of write-ups on the technical nature of this malware/adware, and I won&rsquo;t attempt to rehash those, they are most likely better than anything that I could contribute anyway.  I did however want to be able to detect this on the network to offer network administrators a chance to locate devices on their network which may be affected.</p>
 
-<p>By creating <a href="https://blog.filippo.io/make-your-own-superfish-infected-vm/">a Superfish infected VM</a> we can examine how the software works in a relatively controlled fashion.</p>
+<p>By creating <a href="https://blog.filippo.io/make-your-own-superfish-infected-vm/">a Superfish infected VM</a> we can examine how the software works in a relatively controlled fashion.<!-- More --></p>
 
 <p>By using &ldquo;netstat -ano&rdquo; both before and after infection it comes obvious that the browsers are redirected to C:\Program Files\Lenovo\VisualDiscovery\VisualDiscovery.exe which listens locally and then makes its own connection to webservers, essentially proxying the connection and resigning SSL connections back to the browser with &quot;<a href="http://blog.erratasec.com/2015/02/extracting-superfish-certificate.html">That Cert</a>&quot;.  This lead me to believe that SuperFish, or more specifically VisualDiscovery.exe, had it&rsquo;s own SSL client code.  As Rob points out in his <a href="http://blog.erratasec.com/2015/02/extracting-superfish-certificate.html">writeup</a> there are proper ways to examine how this works and ghetto ways&hellip;.  I went ghetto.</p>
 

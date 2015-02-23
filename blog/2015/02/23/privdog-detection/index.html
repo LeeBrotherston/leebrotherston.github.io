@@ -1,0 +1,87 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>PrivDog Detection - SquareLemon</title>
+	<meta name="author" content="Lee Brotherson">
+
+	
+	<meta name="description" content="In much the same way as I was able to detect hosts infected with SuperFish by profiling the changes in Cipher Suites used in their SSL connections ( &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="SquareLemon" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+	<div class="container">	
+
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+					<article class="post">
+	<h1 class="title">PrivDog Detection</h1>
+	<div class="entry-content"><p>In much the same way as I was <a href="http://blog.squarelemon.com/blog/2015/02/20/superfish-detection/">able to detect hosts infected with SuperFish</a> by profiling the changes in Cipher Suites used in their SSL connections (by virtue of SuperFish essentially having it&rsquo;s own SSL client) I have been able to create a fingerprint for PrivDog.  For those who are interested, the ciphersuites used by the PrivDog client are:<!-- More --></p>
+
+<blockquote><p>Cipher Suites (44 suites)<br/>    Cipher Suite: TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (0xc014)<br/>    Cipher Suite: TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA (0xc00a)<br/>    Cipher Suite: TLS_SRP_SHA_DSS_WITH_AES_256_CBC_SHA (0xc022)<br/>    Cipher Suite: TLS_SRP_SHA_RSA_WITH_AES_256_CBC_SHA (0xc021)<br/>    Cipher Suite: TLS_DHE_RSA_WITH_AES_256_CBC_SHA (0x0039)<br/>    Cipher Suite: TLS_DHE_DSS_WITH_AES_256_CBC_SHA (0x0038)<br/>    Cipher Suite: TLS_ECDH_RSA_WITH_AES_256_CBC_SHA (0xc00f)<br/>    Cipher Suite: TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA (0xc005)<br/>    Cipher Suite: TLS_RSA_WITH_AES_256_CBC_SHA (0x0035)<br/>    Cipher Suite: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (0xc013)<br/>    Cipher Suite: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA (0xc009)<br/>    Cipher Suite: TLS_SRP_SHA_DSS_WITH_AES_128_CBC_SHA (0xc01f)<br/>    Cipher Suite: TLS_SRP_SHA_RSA_WITH_AES_128_CBC_SHA (0xc01e)<br/>    Cipher Suite: TLS_DHE_RSA_WITH_AES_128_CBC_SHA (0x0033)<br/>    Cipher Suite: TLS_DHE_DSS_WITH_AES_128_CBC_SHA (0x0032)<br/>    Cipher Suite: TLS_ECDH_RSA_WITH_AES_128_CBC_SHA (0xc00e)<br/>    Cipher Suite: TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA (0xc004)<br/>    Cipher Suite: TLS_RSA_WITH_AES_128_CBC_SHA (0x002f)<br/>    Cipher Suite: TLS_ECDHE_RSA_WITH_RC4_128_SHA (0xc011)<br/>    Cipher Suite: TLS_ECDHE_ECDSA_WITH_RC4_128_SHA (0xc007)<br/>    Cipher Suite: TLS_ECDH_RSA_WITH_RC4_128_SHA (0xc00c)<br/>    Cipher Suite: TLS_ECDH_ECDSA_WITH_RC4_128_SHA (0xc002)<br/>    Cipher Suite: TLS_RSA_WITH_RC4_128_SHA (0x0005)<br/>    Cipher Suite: TLS_RSA_WITH_RC4_128_MD5 (0x0004)<br/>    Cipher Suite: TLS_DHE_RSA_WITH_SEED_CBC_SHA (0x009a)<br/>    Cipher Suite: TLS_DHE_DSS_WITH_SEED_CBC_SHA (0x0099)<br/>    Cipher Suite: TLS_RSA_WITH_SEED_CBC_SHA (0x0096)<br/>    Cipher Suite: TLS_DHE_RSA_WITH_DES_CBC_SHA (0x0015)<br/>    Cipher Suite: TLS_DHE_DSS_WITH_DES_CBC_SHA (0x0012)<br/>    Cipher Suite: TLS_RSA_WITH_DES_CBC_SHA (0x0009)<br/>    Cipher Suite: TLS_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA (0x0014)<br/>    Cipher Suite: TLS_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA (0x0011)<br/>    Cipher Suite: TLS_RSA_EXPORT_WITH_DES40_CBC_SHA (0x0008)<br/>    Cipher Suite: TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA (0xc012)<br/>    Cipher Suite: TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA (0xc008)<br/>    Cipher Suite: TLS_SRP_SHA_DSS_WITH_3DES_EDE_CBC_SHA (0xc01c)<br/>    Cipher Suite: TLS_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA (0xc01b)<br/>    Cipher Suite: TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA (0x0016)<br/>    Cipher Suite: TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA (0x0013)<br/>    Cipher Suite: TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA (0xc00d)<br/>    Cipher Suite: TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA (0xc003)<br/>    Cipher Suite: TLS_RSA_WITH_3DES_EDE_CBC_SHA (0x000a)<br/>    Cipher Suite: TLS_RSA_WITH_IDEA_CBC_SHA (0x0007)<br/>    Cipher Suite: TLS_EMPTY_RENEGOTIATION_INFO_SCSV (0x00ff)</p></blockquote>
+
+
+<p>I have updated my <a href="https://github.com/LeeBrotherston/snort/blob/master/snort_interception.rules">Interception Snort Rules</a> to include this.</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<!-- <a class="addthis_counter addthis_pill_style"></a> -->
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+				</div>
+			</div>
+			<footer id="footer" class="inner">
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> - 
+
+    <a href="/about">Lee Brotherson</a>
+ |
+</footer>
+			<script src="/javascripts/slash.js"></script>
+
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-54930700-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+	</div>
+</body>
+</html>
