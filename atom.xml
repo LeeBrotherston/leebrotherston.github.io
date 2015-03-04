@@ -4,7 +4,7 @@
   <title><![CDATA[SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-03-04T11:42:43-05:00</updated>
+  <updated>2015-03-04T11:56:13-05:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -28,7 +28,7 @@
 
 <p><img src="http://blog.squarelemon.com/images/upload/netstat.png"></p>
 
-<p>By looking at the details tab on taskmanager we can see which executable names those pids pertain to.  In this case it&rsquo;s iexplore.exe (Internet Explorer) and Client.exe (GeniusBox):</p>
+<p>By looking at the details tab on taskmanager we can see which executable names those pids pertain to.  In this case it&rsquo;s iexplore.exe (Internet Explorer) and Client.exe (<a href="http://geniusbox.net/">GeniusBox</a>):</p>
 
 <p><img src="http://blog.squarelemon.com/images/upload/taskman.png"></p>
 
