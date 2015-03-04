@@ -4,7 +4,7 @@
   <title><![CDATA[SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-03-04T11:40:44-05:00</updated>
+  <updated>2015-03-04T11:42:43-05:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Quick &amp; Dirty Crapware Analysis - IDS Rule Creation Foo]]></title>
-    <link href="http://blog.squarelemon.com/blog/2015/03/03/quick-and-dirty-crapware-analysis-ids-rule-creation-foo/"/>
-    <updated>2015-03-03T16:31:18-05:00</updated>
-    <id>http://blog.squarelemon.com/blog/2015/03/03/quick-and-dirty-crapware-analysis-ids-rule-creation-foo</id>
+    <link href="http://blog.squarelemon.com/blog/2015/03/04/quick-and-dirty-crapware-analysis-ids-rule-creation-foo/"/>
+    <updated>2015-03-04T08:31:18-05:00</updated>
+    <id>http://blog.squarelemon.com/blog/2015/03/04/quick-and-dirty-crapware-analysis-ids-rule-creation-foo</id>
     <content type="html"><![CDATA[<p>Recently I have made some brief posts on the <a href="https://github.com/LeeBrotherston/snort">Snort/Suricata rules</a> that I wrote to detect <a href="http://blog.squarelemon.com/blog/2015/02/20/superfish-detection/">SuperFish</a> and <a href="http://blog.squarelemon.com/blog/2015/02/23/privdog-detection/">PrivDog</a>, two pieces of Crapware/Malware/Adware/PUP that insert themselves as a Certificate Authority in the local browsers and proceed to Man in the Middle HTTPS traffic for the purposes of injecting ads.</p>
 
 <p>In those posts I mentioned that CipherSuite fingerprinting was the key to creating the rules, however I didn&rsquo;t give a very comprehensive technical blow-by-blow.  So, now I have a new rule to add having noticed another application Man in the Middle&#8217;ing browsers (GeniusBox) using the same technique, it seems like an apt time to write up what I have been doing in a more useful way.<!-- more --></p>
