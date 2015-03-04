@@ -7,7 +7,7 @@
 	<meta name="author" content="Lee Brotherson">
 
 	
-	<meta name="description" content="In much the same way as I was able to detect hosts infected with SuperFish by profiling the changes in Cipher Suites used in their SSL connections ( &hellip;">
+	<meta name="description" content="Recently I have made some brief posts on the Snort/Suricata rules that I wrote to detect SuperFish and PrivDog, two pieces of Crapware/Malware/ &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -28,6 +28,35 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 					
+
+
+    <article class="post">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-03T16:31:18-05:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2015</time></div>
+		
+	</div>
+	<h1 class="title"><a href="/blog/2015/03/03/quick-and-dirty-crapware-analysis-ids-rule-creation-foo/">Quick &amp; Dirty Crapware Analysis - IDS Rule Creation Foo</a></h1>
+	<div class="entry-content">
+		<p>Recently I have made some brief posts on the <a href="https://github.com/LeeBrotherston/snort">Snort/Suricata rules</a> that I wrote to detect <a href="http://blog.squarelemon.com/blog/2015/02/20/superfish-detection/">SuperFish</a> and <a href="http://blog.squarelemon.com/blog/2015/02/23/privdog-detection/">PrivDog</a>, two pieces of Crapware/Malware/Adware/PUP that insert themselves as a Certificate Authority in the local browsers and proceed to Man in the Middle HTTPS traffic for the purposes of injecting ads.</p>
+
+<p>In those posts I mentioned that CipherSuite fingerprinting was the key to creating the rules, however I didn&rsquo;t give a very comprehensive technical blow-by-blow.  So, now I have a new rule to add having noticed another application Man in the Middle&#8217;ing browsers (GeniusBox) using the same technique, it seems like an apt time to write up what I have been doing in a more useful way.
+		
+		<a href="/blog/2015/03/03/quick-and-dirty-crapware-analysis-ids-rule-creation-foo/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post">
@@ -302,33 +331,6 @@
 
 		
 		
-	</div>
-
-</article>
-
-
-    <article class="post">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-04T23:38:11-05:00" pubdate data-updated="true">Jan 4<span>th</span>, 2015</time></div>
-		
-	</div>
-	<h1 class="title"><a href="/blog/2015/01/04/mitm-at-30/">MiTM at 30,000 Feet</a></h1>
-	<div class="entry-content">
-		<p>In the past week I have seen a few mentions on twitter regarding <a href="http://twitter.com/gogo">Gogo Air</a> presenting fake SSL certs for YouTube to users of their in air Internet access service:<br />
-		
-		<a href="/blog/2015/01/04/mitm-at-30/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

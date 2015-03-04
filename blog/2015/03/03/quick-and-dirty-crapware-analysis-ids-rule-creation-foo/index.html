@@ -1,40 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: infosec | SquareLemon]]></title>
-  <link href="http://blog.squarelemon.com/blog/categories/infosec/atom.xml" rel="self"/>
-  <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-03-04T11:40:44-05:00</updated>
-  <id>http://blog.squarelemon.com/</id>
-  <author>
-    <name><![CDATA[Lee Brotherson]]></name>
-    <email><![CDATA[contact@squarelemon.com]]></email>
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Quick &amp; Dirty Crapware Analysis - IDS Rule Creation Foo - SquareLemon</title>
+	<meta name="author" content="Lee Brotherson">
 
-  
-  <entry>
-    <title type="html"><![CDATA[Quick &amp; Dirty Crapware Analysis - IDS Rule Creation Foo]]></title>
-    <link href="http://blog.squarelemon.com/blog/2015/03/03/quick-and-dirty-crapware-analysis-ids-rule-creation-foo/"/>
-    <updated>2015-03-03T16:31:18-05:00</updated>
-    <id>http://blog.squarelemon.com/blog/2015/03/03/quick-and-dirty-crapware-analysis-ids-rule-creation-foo</id>
-    <content type="html"><![CDATA[<p>Recently I have made some brief posts on the <a href="https://github.com/LeeBrotherston/snort">Snort/Suricata rules</a> that I wrote to detect <a href="http://blog.squarelemon.com/blog/2015/02/20/superfish-detection/">SuperFish</a> and <a href="http://blog.squarelemon.com/blog/2015/02/23/privdog-detection/">PrivDog</a>, two pieces of Crapware/Malware/Adware/PUP that insert themselves as a Certificate Authority in the local browsers and proceed to Man in the Middle HTTPS traffic for the purposes of injecting ads.</p>
+	
+	<meta name="description" content="Recently I have made some brief posts on the Snort/Suricata rules that I wrote to detect SuperFish and PrivDog, two pieces of Crapware/Malware/Adware &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<p>In those posts I mentioned that CipherSuite fingerprinting was the key to creating the rules, however I didn&rsquo;t give a very comprehensive technical blow-by-blow.  So, now I have a new rule to add having noticed another application Man in the Middle'ing browsers (GeniusBox) using the same technique, it seems like an apt time to write up what I have been doing in a more useful way.<!-- more --></p>
+	<link href="/atom.xml" rel="alternate" title="SquareLemon" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+	<div class="container">	
+
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+					<article class="post">
+	<h1 class="title">Quick &amp; Dirty Crapware Analysis - IDS Rule Creation Foo</h1>
+	<div class="entry-content"><p>Recently I have made some brief posts on the <a href="https://github.com/LeeBrotherston/snort">Snort/Suricata rules</a> that I wrote to detect <a href="http://blog.squarelemon.com/blog/2015/02/20/superfish-detection/">SuperFish</a> and <a href="http://blog.squarelemon.com/blog/2015/02/23/privdog-detection/">PrivDog</a>, two pieces of Crapware/Malware/Adware/PUP that insert themselves as a Certificate Authority in the local browsers and proceed to Man in the Middle HTTPS traffic for the purposes of injecting ads.</p>
+
+<p>In those posts I mentioned that CipherSuite fingerprinting was the key to creating the rules, however I didn&rsquo;t give a very comprehensive technical blow-by-blow.  So, now I have a new rule to add having noticed another application Man in the Middle&#8217;ing browsers (GeniusBox) using the same technique, it seems like an apt time to write up what I have been doing in a more useful way.<!-- more --></p>
 
 <p>Although many of these miscreant applications insert scripts into webpages that are hosted on remote sources, they all conduct their Man in the Middle attacks on the local machine.  The chosen technique is to, either via network hooks or by setting browsers to use localhost as a proxy, ensure that the connection from the browser is terminated locally and a connection to the webserver is made via their &ldquo;application&rdquo;.  They don&rsquo;t hide this, it is trivial to spot with some ghetto forensics.</p>
 
 <p>First we can use <code>netstat -ano</code> to look at the connections and associated pid&rsquo;s on the local host.  Notice how PID 3388 is making a local connection to a listening PID 4084 on port 49546?  Also note that PID 4084 is also making a number of connections to external hosts on ports 80 (http) and 443 (https):</p>
 
-<p><img src="http://blog.squarelemon.com/images/upload/netstat.png"></p>
+<p><img src="/images/upload/netstat.png"></p>
 
 <p>By looking at the details tab on taskmanager we can see which executable names those pids pertain to.  In this case it&rsquo;s iexplore.exe (Internet Explorer) and Client.exe (GeniusBox):</p>
 
-<p><img src="http://blog.squarelemon.com/images/upload/taskman.png"></p>
+<p><img src="/images/upload/taskman.png"></p>
 
 <p>Finally, by looking at the process details in Task Manager we can see which directory the binary resides in and can look at that location to see if it really is the app we suspect it is:</p>
 
-<p><img src="http://blog.squarelemon.com/images/upload/install_dir.png"></p>
+<p><img src="/images/upload/install_dir.png"></p>
 
 <p>Certainly looks that way!</p>
 
@@ -44,7 +55,7 @@
 
 <p>Each of the captures can be loaded into WireShark in turn for easy analysis (other packet capture tools will show the info too, but WireShark just makes it easy), the hex is helpfully highlighted at the bottom so we know which data to include in a snort/suricata rule:</p>
 
-<p><img src="http://blog.squarelemon.com/images/upload/wireshark.png" style="border: 1px solid #000000;"></p>
+<p><img src="/images/upload/wireshark.png" style="border: 1px solid #000000;"></p>
 
 <p>The list is not only the supported Cipher Suites, it is also in preference order.  My research thus far shows the the combination of supported Cipher Suites, preference order and total number of suites offered is fairly unique to each browser family.  It remains static between each connection that the browser makes, this is not a per-session variable.</p>
 
@@ -63,7 +74,53 @@
 <p>I have added this to <a href="https://github.com/LeeBrotherston/snort">my snort/suricata rules for interception detection</a> which also include coverage for <a href="http://blog.squarelemon.com/blog/2015/02/20/superfish-detection/">SuperFish</a>, <a href="http://blog.squarelemon.com/blog/2015/02/23/privdog-detection/">PrivDog</a> and the techniques described in my <a href="http://blog.squarelemon.com/blog/2014/12/29/bsides-toronto-video-and-slides/">Corporation in the Middle talk</a>.</p>
 
 <p>Any feedback on the rules are greatly appreciated.  Especially if anyone has particular successes to share of failures to highlight that I can use to improve the accuracy.  As always you can <a href="https://twitter.com/synackpse">reach me on twitter, I am @synackpse</a> or <a href="https://github.com/LeeBrotherston/snort/issues">raise an issue in github</a>.</p>
-]]></content>
-  </entry>
-  
-</feed>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<!-- <a class="addthis_counter addthis_pill_style"></a> -->
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+				</div>
+			</div>
+			<footer id="footer" class="inner">
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> - 
+
+    <a href="/about">Lee Brotherson</a>
+ |
+</footer>
+			<script src="/javascripts/slash.js"></script>
+
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-54930700-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+	</div>
+</body>
+</html>
