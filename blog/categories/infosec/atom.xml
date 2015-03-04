@@ -4,7 +4,7 @@
   <title><![CDATA[Category: infosec | SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/blog/categories/infosec/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-03-04T11:56:13-05:00</updated>
+  <updated>2015-03-04T12:01:12-05:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -20,7 +20,7 @@
     <id>http://blog.squarelemon.com/blog/2015/03/04/quick-and-dirty-crapware-analysis-ids-rule-creation-foo</id>
     <content type="html"><![CDATA[<p>Recently I have made some brief posts on the <a href="https://github.com/LeeBrotherston/snort">Snort/Suricata rules</a> that I wrote to detect <a href="http://blog.squarelemon.com/blog/2015/02/20/superfish-detection/">SuperFish</a> and <a href="http://blog.squarelemon.com/blog/2015/02/23/privdog-detection/">PrivDog</a>, two pieces of Crapware/Malware/Adware/PUP that insert themselves as a Certificate Authority in the local browsers and proceed to Man in the Middle HTTPS traffic for the purposes of injecting ads.</p>
 
-<p>In those posts I mentioned that CipherSuite fingerprinting was the key to creating the rules, however I didn&rsquo;t give a very comprehensive technical blow-by-blow.  So, now I have a new rule to add having noticed another application Man in the Middle'ing browsers (GeniusBox) using the same technique, it seems like an apt time to write up what I have been doing in a more useful way.<!-- more --></p>
+<p>In those posts I mentioned that CipherSuite fingerprinting was the key to creating the rules, however I didn&rsquo;t give a very comprehensive technical blow-by-blow.  So, now I have a new rule to add having noticed another application Man in the Middle'ing browsers (<a href="http://geniusbox.net/">GeniusBox</a>) using the same technique, it seems like an apt time to write up what I have been doing in a more useful way.<!-- more --></p>
 
 <p>Although many of these miscreant applications insert scripts into webpages that are hosted on remote sources, they all conduct their Man in the Middle attacks on the local machine.  The chosen technique is to, either via network hooks or by setting browsers to use localhost as a proxy, ensure that the connection from the browser is terminated locally and a connection to the webserver is made via their &ldquo;application&rdquo;.  They don&rsquo;t hide this, it is trivial to spot with some ghetto forensics.</p>
 
