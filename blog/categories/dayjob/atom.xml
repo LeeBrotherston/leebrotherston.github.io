@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: dayjob | SquareLemon]]></title>
+  <link href="http://blog.squarelemon.com/blog/categories/dayjob/atom.xml" rel="self"/>
+  <link href="http://blog.squarelemon.com/"/>
+  <updated>2015-03-05T16:36:33-05:00</updated>
+  <id>http://blog.squarelemon.com/</id>
+  <author>
+    <name><![CDATA[Lee Brotherson]]></name>
+    <email><![CDATA[contact@squarelemon.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CSI:Cyber - it's not _all_ bad]]></title>
+    <link href="http://blog.squarelemon.com/blog/2015/03/05/csi-cyber-its-not-all-bad/"/>
+    <updated>2015-03-05T16:26:33-05:00</updated>
+    <id>http://blog.squarelemon.com/blog/2015/03/05/csi-cyber-its-not-all-bad</id>
+    <content type="html"><![CDATA[<p>I made my inaugural post on the <a href="https://twitter.com/LeviathanSec">@LeviathanSec</a> blog. <a href="https://www.leviathansecurity.com/blog/unpopular-opinion-csi-cyber-could-be-good-for-information-security/">Why CSI: Cyber could actually be good for infosec</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>
