@@ -61,34 +61,34 @@ as planned, specifically because the venue wifi was &ldquo;correcting&rdquo; my 
 of the DNS on the demo victim, they were still visiting the real website.</p>
 
 <p>And so a new demo was born, the &ldquo;How this venue wifi is tampering with our, and
-your, connection right now&rdquo; demo.  So what happened?</p>
+your, connection right now&rdquo; demo.</p>
 
-<p>It appeared that DNS on this network was not used to contact the webserver of
-choice when browsing to a page, it was merely a method to ensure that
+<p>It appeared that DNS on this network was not used to determine which webserver
+to contact when browsing to a page, it was merely a method to ensure that
 connections were routed to anything other than the local network, at which
-point something else took over.  This is pretty easy to prove, by setting up
+point something else took over.  This is pretty easy to demonstrate, by setting up
 an /etc/hosts entry (used to locally override DNS for a particular FQDN) for a
 website, directing it to an unused RFC1918 address which was not on the local
-network (and by definition not on the internet either) we can test how DNS is
+network, and by definition not on the internet either, we can test how DNS is
 used.  The site still loaded up fine in a browser, this leads me to suspect
 that a transparent proxy is inline somewhere, intercepting all traffic and then
-using the host header in the HTTP request to fetch pages instead of using the
-destination of the IP packets to make such a determination.</p>
+using the host header in the HTTP request to determine which pages to deliver
+as opposed to using the destination addres in the of the IP header.</p>
 
-<p>A tcptraceroute on port 80 we also find that every website that I tested
-was located on the local LAN, which of course they are not:</p>
+<p>Using tcptraceroute on port 80 we also find that every website tested was
+apparently located on the local LAN, which of course they are not:</p>
 
 <blockquote><p>$ sudo tcptraceroute www.google.com 80<br/>Selected device en0, address 192.168.1.4, port 55333 for outgoing packets<br/>Tracing the path to www.google.com (66.185.95.49) on TCP port 80 (http), 30 hops max<br/> 1  66.185.95.49 [open]  0.576 ms  0.744 ms  0.515 ms</p></blockquote>
 
 
-<p>Finally using any packetsniffer (tcpdump in this case), we can capture the
+<p>Finally using any packetsniffer (wireshark in this case), we can capture the
 payload of a transaction and look for artifacts which may give away what is
 happening.  In this instance it was very easy to spot:</p>
 
 <blockquote><p>X-Cache: MISS from localhost<br/>X-Cache-Lookup: MISS from localhost:3128<br/>Via: 1.1 localhost:3128 (squid/2.7.STABLE9)</p></blockquote>
 
 
-<p>These lines in the HTTP response header are not sent my the webserver, I was
+<p>These lines in the HTTP response header are not sent by the webserver, I was
 visiting my own webserver, so I&rsquo;m pretty sure of this fact.  Anyone who has
 experience in this field knows that this screams transparent proxy.  And if you
 look up the version which is so helpfully displayed, you will notice that it
@@ -96,12 +96,13 @@ screams horribly out of date and probably not patched proxy.</p>
 
 <p>The point that we made at the time is that a high percentage of users in the
 audience are probably on this network as we spoke, that they were being MiTM&rsquo;d
-and that if someone had compromised an old version of squid that they could
-have been doing any number of things to those http connections.</p>
+without their knowledge.  If someone had compromised that old version of squid
+that they could have been doing any number of things to those http connections
+and the devices using them.</p>
 
 <p>As security professionals we talk about the dangers of conference and coffee
-shop wifi, from the point of view of other users of the network being
-malicious.  It&rsquo;s always worth remembering that you can&rsquo;t trust the venues
+shop wifi all the time, from the point of view of other users of the network
+being malicious.  It&rsquo;s always worth remembering that you can&rsquo;t trust the venues
 themselves to be completely clean either.</p>
 
 		
