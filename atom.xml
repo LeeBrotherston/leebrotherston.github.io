@@ -4,7 +4,7 @@
   <title><![CDATA[SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-06-22T16:54:48-04:00</updated>
+  <updated>2015-06-23T09:53:47-04:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -14,13 +14,75 @@
 
   
   <entry>
+    <title type="html"><![CDATA[MiTM'ing the MiTM'ers]]></title>
+    <link href="http://blog.squarelemon.com/blog/2015/06/21/mitm-the-mitmers/"/>
+    <updated>2015-06-21T14:55:10-04:00</updated>
+    <id>http://blog.squarelemon.com/blog/2015/06/21/mitm-the-mitmers</id>
+    <content type="html"><![CDATA[<p>Last week I mentioned that <a href="https://www.twitter.com/myrcurial/">James
+Arlen</a> and <a href="https://www.twitter.com/synackpse/">I</a> gave the
+<a href="http://blog.squarelemon.com/blog/2015/06/12/sc-congress-toronto/">closing keynote at SCCongress
+Toronto</a>.  We had planned to do a live demo as part of the talk, but after
+reaching the venue and connecting to the wifi we found that it would not work
+as planned, specifically because the venue wifi was &ldquo;correcting&rdquo; my tampering
+of the DNS on the demo victim, they were still visiting the real website.</p>
+
+<p>And so a new demo was born, the &ldquo;How this venue wifi is tampering with our, and
+your, connection right now&rdquo; demo.  So what happened?</p>
+
+<p>It appeared that DNS on this network was not used to contact the webserver of
+choice when browsing to a page, it was merely a method to ensure that
+connections were routed to anything other than the local network, at which
+point something else took over.  This is pretty easy to prove, by setting up
+an /etc/hosts entry (used to locally override DNS for a particular FQDN) for a
+website, directing it to an unused RFC1918 address which was not on the local
+network (and by definition not on the internet either) we can test how DNS is
+used.  The site still loaded up fine in a browser, this leads me to suspect
+that a transparent proxy is inline somewhere, intercepting all traffic and then
+using the host header in the HTTP request to fetch pages instead of using the
+destination of the IP packets to make such a determination.</p>
+
+<p>A tcptraceroute on port 80 we also find that every website that I tested
+was located on the local LAN, which of course they are not:</p>
+
+<blockquote><p>$ sudo tcptraceroute www.google.com 80<br/>Selected device en0, address 192.168.1.4, port 55333 for outgoing packets<br/>Tracing the path to www.google.com (66.185.95.49) on TCP port 80 (http), 30 hops max<br/> 1  66.185.95.49 [open]  0.576 ms  0.744 ms  0.515 ms</p></blockquote>
+
+
+<p>Finally using any packetsniffer (tcpdump in this case), we can capture the
+payload of a transaction and look for artifacts which may give away what is
+happening.  In this instance it was very easy to spot:</p>
+
+<blockquote><p>X-Cache: MISS from localhost<br/>X-Cache-Lookup: MISS from localhost:3128<br/>Via: 1.1 localhost:3128 (squid/2.7.STABLE9)</p></blockquote>
+
+
+<p>These lines in the HTTP response header are not sent my the webserver, I was
+visiting my own webserver, so I&rsquo;m pretty sure of this fact.  Anyone who has
+experience in this field knows that this screams transparent proxy.  And if you
+look up the version which is so helpfully displayed, you will notice that it
+screams horribly out of date and probably not patched proxy.</p>
+
+<p>The point that we made at the time is that a high percentage of users in the
+audience are probably on this network as we spoke, that they were being MiTM&rsquo;d
+and that if someone had compromised an old version of squid that they could
+have been doing any number of things to those http connections.</p>
+
+<p>As security professionals we talk about the dangers of conference and coffee
+shop wifi, from the point of view of other users of the network being
+malicious.  It&rsquo;s always worth remembering that you can&rsquo;t trust the venues
+themselves to be completely clean either.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[SC Congress Toronto]]></title>
     <link href="http://blog.squarelemon.com/blog/2015/06/12/sc-congress-toronto/"/>
     <updated>2015-06-12T10:38:51-04:00</updated>
     <id>http://blog.squarelemon.com/blog/2015/06/12/sc-congress-toronto</id>
     <content type="html"><![CDATA[<p>Yesterday <a href="https://twitter.com/myrcurial/">James Arlen</a> and <a href="https://twitter.com/synackpse/">I</a> gave the closing Keynote at <a href="http://www.sccongress.com/toronto/">SC Congress Toronto</a>.<br /></p>
 
-<p><img src="https://pbs.twimg.com/media/CHPvf5gWkAAEBdN.jpg"></p>
+<!--
+<img src="https://pbs.twimg.com/media/CHPvf5gWkAAEBdN.jpg">
+&#8211;>
+
 
 <p>If you would like to see the slides, we have made the available on slideshare:</p>
 
@@ -459,50 +521,6 @@ defenders and attackers rather than cryptographers.  Here&rsquo;s the abstract:<
 <p>The original blurb was:
 <i>My ISP deliberately MiTM&rsquo;d my connection.  This talk discusses how they did it, how I detected what they did and what this means.  This talk covers what I learnt over three months of analysis focusing on the technology involved both on the ISP side and my own. I cover in detail how I went about identifying and mapping the ISPs hidden network components and how they modify IP connections. I will briefly cover what this means to customers of their service.  During the talk I will provide technical evidence as well as walk through how I used open source tools to unmask this Corp In The Middle attack.
 </i></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Is your EULA lowering your Application Security?]]></title>
-    <link href="http://blog.squarelemon.com/blog/2014/07/18/is-your-eula-lowering-your-application-security/"/>
-    <updated>2014-07-18T09:55:44-04:00</updated>
-    <id>http://blog.squarelemon.com/blog/2014/07/18/is-your-eula-lowering-your-application-security</id>
-    <content type="html"><![CDATA[<p>A couple of days ago I tweeted this:</p>
-
-<center>
-<blockquote class="twitter-tweet" lang="en"><p>I&#39;m pretty sure when your EULA prohibits reverse engineering your software, all you prevent is people telling you that they reversed it.</p>&mdash; leE Brotherston (@leEb_public) <a href="https://twitter.com/leEb_public/statuses/489050821649506304">July 15, 2014</a></blockquote>
-<script async src="http://blog.squarelemon.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
-</center>
-
-
-<p>Quite a lot of people agreed (at the time of writing it has 40 retweets and 19 favourites, which is quite a lot for me), so I thought that I would expand and explain this in a little more detail.<!-- More --></p>
-
-<p>The End User Licence Agreement (EULA) is something which is fairly common inclusion in commercial applications, and is typically something dreamed up by the legal team to attempt to enforce whatever it is that they feel needs to be added as part of the licencing agreement.  What prompted my particular comment was something I noticed in the EULA of an application I was using, which prohibited the user from being able to:</p>
-
-<blockquote><p>&#8220;copy, distribute, publish, reverse engineer, decompile, disassemble, modify, or translate the Software&#8221;</p></blockquote>
-
-
-<p>A <a href="https://duckduckgo.com/?q=%22copy%2C+distribute%2C+publish%2C+reverse+engineer%2C+decompile%2C+disassemble%2C+modify%2C+or+translate+the+Software%22">quick search</a> seems to indicate that this is a fairly common clause in a number of EULAs, particularly in the world of gambling (maybe they all use the same template or legal team).</p>
-
-<p>My assumption is that this clause is included in order to prevent people from creating clone clients, perhaps ones which automate betting and casino style gambling, laundering via robot card games or perhaps just an attempt to hide flaws in the application stack somewhere.</p>
-
-<p>My initial thought was merely that this would not prevent anyone with ill intentions from reversing the code.  People who are willing to use an application or service for fraudulent means are probably committing crimes such as fraud in the process, if they&rsquo;re able to accept that I don&rsquo;t believe that a licence violation will be a massive disincentive.</p>
-
-<p>Similarly if people are not comitting a crime like fraud or money laundering, but are using automated tools to game the system by autmatically playing low-winning games for hours on end, for example, probably don&rsquo;t care about the EULA too much.</p>
-
-<p>Finally, those who are seeking to reverse engineer the code to find exploits and attack the system in some way (ok this is also crime, but a different type) probably will not care about the EULA.</p>
-
-<p>However&hellip;</p>
-
-<p>Security researchers, for example, <b>are</b> likely to be dissuaded from taking a closer look at an application by a restrictive EULA, but they are the very people that we do not want to be dissuaded.  We want these people to find the problems and report them responsibly.  In a perfect world you would have a bug bounty program like those at <a href="https://www.etsy.com/ca/help/article/2463">Etsy</a>, <a href="https://www.facebook.com/whitehat">Facebook</a> and <a href="http://technet.microsoft.com/en-us/security/dn425036">Microsoft</a> to incentivize people to disclose bugs early and often.  But even without a formal bug bounty program in place dissuading researchers via the EULA could well lower your security posture.  Chances are that a resrictive EULA has just cut off their only option to report it to you responsibly without fear of some knee-jerk legal retaliation.  Instead, as <a href="https://twitter.com/essobi">@esSOBI</a> rightly points out:</p>
-
-<center>
-<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/leEb_public">@leEb_public</a> <a href="https://twitter.com/thegrugq">@thegrugq</a> &#10;Do you want to wind up on pastebin? Cause that&#39;s how you wind up on pastebin.</p>&mdash; esSOBi (@essobi) <a href="https://twitter.com/essobi/statuses/489109019878248448">July 15, 2014</a></blockquote>
-<script async src="http://blog.squarelemon.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
-</center>
-
-
-<p>Perhaps it&rsquo;s time Information Security people engaged with Legal instead of dismissing the EULA on your product as &ldquo;business stuff&rdquo; and make sure that it isn&rsquo;t damaging your chances at a more secure product.</p>
 ]]></content>
   </entry>
   
