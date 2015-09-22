@@ -1,0 +1,156 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>TLS fingerprinting (Smarter Defending & Stealthier Attacking) - SquareLemon</title>
+	<meta name="author" content="Lee Brotherson">
+
+	
+	<meta name="description" content="Background Transport Layer Security (TLS) provides transport security to all manner of connections from legitimate financial transactions to private &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="SquareLemon" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+	<div class="container">	
+
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+					<article class="page">
+    
+    <h1 class="title">TLS Fingerprinting (Smarter Defending & Stealthier Attacking)</h1>
+    
+    <div class="entry-content"><h2>Background</h2>
+
+<p>Transport Layer Security (TLS) provides transport security to all manner of connections from legitimate financial transactions to private conversations and malware calling home. The inability to analyse encrypted traffic protects its users, whether they are legitimate or malicious.  Users operate under the assumption that although the existence of their session, its source and destination IP addresses can be easily observed by an eavesdropper, that the content itself is secure and unreadable without access to cryptographic keying material at one or both ends of the connection.  On the face of it this holds true, barring any configuration flaws or exploitable vulnerabilities, however it is easy to quickly and passively determine which client being used and to use this information from both attacker and defender perspectives.</p>
+
+<p>Previously I have been able to demonstrate that certain clients could be differentiated from other network traffic.  Specifically being able to discriminate <a href="http://blog.squarelemon.com/blog/2015/02/20/superfish-detection/">SuperFish</a>, <a href="http://blog.squarelemon.com/blog/2015/02/23/privdog-detection/">PrivDog</a>, and <a href="http://blog.squarelemon.com/blog/2015/03/04/quick-and-dirty-crapware-analysis-ids-rule-creation-foo/">GeniusBox</a> from the mainstream browsers when making HTTPS connections, and generating IDS signatures <a href="http://blog.squarelemon.com/blog/2015/03/04/quick-and-dirty-crapware-analysis-ids-rule-creation-foo/">3</a> based on these findings to assist network administrators in being able to identify problematic hosts without requiring access to either endpoint.</p>
+
+<h2>TLS</h2>
+
+<p>Prior to entering initiating encrypted communications, TLS needs to create a handshake between client and server which is used to select the best mutually acceptable cryptographic ciphers, compression systems, hashing algorithms and such like.  Of course as the method of cryptography in use has yet to be determined this is conducted in the clear, which is not problematic from the point of view of breaking cryptography, the public exchange of private keys is a well accepted technique, however it does allow the opportunity to observe some behaviour which is not masked from any eavesdropper by encryption.</p>
+
+<p>A TLS connection will always begin with a &ldquo;client hello&rdquo; packet which announces to the server end of the connection the capabilities of the client, presented in preference order.  The server will send a similar packet back, a &ldquo;server hello&rdquo; describing the server capabilities in preference order.  By comparing the two packets, client and server can determine the optimal ciphersuites, compression algorithms, etc to use per their preferences.</p>
+
+<h2>Fingerprints</h2>
+
+<p>By capturing the elements of the Client Hello packet which remain static from session to session for each client, it is possible to build a fingerprint to recognise a particular client on subsequent sessions.  The fields which are captured are: TLS version, record TLS version, ciphersuites, compression options, and a list of extensions.  Additionally data is captured from three specific extensions, if available: signature algorithms, elliptic curves and elliptic curve point format.  The use of this combined data is not only reliable in terms of remaining static for any particular client, but offers greater granularity than assessing ciphersuites alone which has substantially larger quantity of fingerprint collisions.</p>
+
+<p>Capturing client hello packets is a particularly good way of fingerprinting TLS packets for many reasons:</p>
+
+<ul>
+<li><p>The client hello packet is the first packet in any TLS connection, by fingerprinting at this stage in the process active protection or attack techniques, as opposed to passive monitoring, can easily be used as there is no requirement to spoof or emulate the protocol, decisions can be made at the beginning of the session.</p></li>
+<li><p>It is possible to capture TLS Client Hello packets with a high degree of accuracy across all ports with absolutely zero requirement to capture both directions of a flow.  This means that sensors in an environment with asymmetric routing or suffering from resource constraints such that packets may be dropped, can still collect client hello packets no matter if they have been obscured by running on non-standard ports or not.</p></li>
+<li><p>Client hello packets occur infrequently enough, that it is possible to capture all client hello packets on a network for analysis without the substantial investment in storage that would be required for full packet capture and such like.  Taking a random sample of mixed desktop traffic, 4G in each direction, it was possible to store all client hello packets using only 20M of disk storage, which could be further reduced to 5.4M of disk if only storing those packets with no session id, i.e. the first packet in any one transaction.</p></li>
+</ul>
+
+
+<h2>Collection of Client Hello packets</h2>
+
+<p>The collection of client hello packets should, if possible, take place without the requirement to track TCP state or infact see any other packet in the same TCP stream, this way collection can be based on a principle of low &ldquo;cost&rdquo;, whereby cost is processor and memory usage to track associated packets to make flow direction determinations and such like, and storage media to store the packets for processing.</p>
+
+<p>By testing on several gigabytes of test pcaps I have found that the following has low (infact zero, in my tests) false positives for identifying a client hello packet amongst mixed tcp traffic:</p>
+
+<ul>
+<li>Byte 0: Value 22, indicating &ldquo;handshake&rdquo; per the TLS specification.</li>
+<li>Byte 5: Value 1, indication &ldquo;client hello&rdquo;, within a handshake packet, per the TLS specification.</li>
+<li>Byte 9: Value 3, the first byte, of two, of the TLS version which aligns with any version of TLS.  The value could also be 0 if matching SSL.</li>
+<li>Byte 1: As byte 9, except this pertains to the &ldquo;record tls version&rdquo;</li>
+</ul>
+
+
+<p>These four bytes can be expressed as the following Berkley Packet Filter:</p>
+
+<p><code>tcp[tcp[12]/16*4]=22 and (tcp[tcp[12]/16*4+5]=1) and (tcp[tcp[12]/16*4+9]=3) and (tcp[tcp[12]/16*4+1]=3)</code></p>
+
+<p>Additionally a check for a value of 0 at byte 43, the session length field, will check for only the first client hello packet in a tcp stream, still permitting fingerprinting whilst reducing the storage space and number of packets processed further.</p>
+
+<p>By using this method filtering out client hello packets from other packets on the network it becomes much more feasible to perform wholesale TLS analysis on an entire network.  Not only because storage and processig is kept to a minimum, but because TLS can be detected irrespective of the port it is operating on, thus reducing the effectiveness of obfuscating protocols by running them on alternative ports.</p>
+
+<h2>Tools</h2>
+
+<p>In order to make TLS Fingerprinting consumable by the Information Security community I have released a set of opensource tools, licenced under the <a href="http://www.gnu.org/licenses/">GNU Public Licence</a>, which can be found on the <a href="https://github.com/LeeBrotherston/FingerprinTLS/">FingerprinTLS GitHub responsitory</a>.  Details of the tools are as  follows.</p>
+
+<h3>FingerprinTLS</h3>
+
+<p><a href="https://github.com/LeeBrotherston/FingerprinTLS/">FingerprinTLS</a> is designed to rapidly identify known TLS connections and fingerprint unknown TLS connections.  Input is taken either via live network sniffing or reading a <a href="https://en.wikipedia.org/wiki/Pcap">PCAP</a> file.  Output for recognised connections is (currently) in human readable output and for unknown fingerprints in the JSON format used for the fingerprint definitions.</p>
+
+<p>Fingerprints which are generated can be exported as a c struct by Fingerprintout and compiled back into FingerprinTLS to enable detecting in future instances.</p>
+
+<h3>Fingerprintout</h3>
+
+<p>Fingerprintout is a tool for managing the fingerprint definitions JSON file with regards to sanitisation and export to other formats.  At the time of writing the possible outputs are:</p>
+
+<ul>
+<li><strong>struct</strong>: c struct format for people to include the fingerprint definitions in their own</li>
+<li><strong>ids</strong>: output in suricata/snort output for detection on existing IPS/IDS infrastructure</li>
+<li><strong>idsinit</strong>: same as ids, but only for the first client hello packet</li>
+<li><strong>cleanse</strong>: sanitises JSON file, producing a new JSON file.  Intended for scrubbing data prior to publishing.</li>
+<li><strong>xkeyscore</strong>: outputs in regex.  Note, this is not as reliable as other forms as offsets are not as easily defined and so liberal use of <code>".*"</code> has been made.  Do not use this for serious purposes!</li>
+</ul>
+
+
+<h2>Real World Applications</h2>
+
+<h3>Passive detection</h3>
+
+<p>The most obvious use of TLS Fingerprinting is for that of passive detection.  This allows the detection of many types of potentially unwanted traffic without the need for access to either endpoint.  Being able to detect malware or software such as SuperFish &amp; PrivDog running on desktops without specifically looking can be very useful.  Other potentially unwanted software can also be detected using this technique, for example the Java updater and TLS connections made by applications written in Java have a specific fingerprint.</p>
+
+<p>The detection of software which may not be malicious, but is out of context could also be worthy of investigation and is simple to detect.  For example many interfaces should be accessed only by a particular client of set of clients.  If a web server is expecting human interaction via a browser, detecting the fingerprint of wget could be significant; an Exchange server may only ever be accessed by Outlook, thus a connection from a Python script would be significant, for example.</p>
+
+<h3>Fingerprint Defined routing</h3>
+
+<p>If a connection is either Man in The Middle&rsquo;d (MiTM) or Proxied, the decision on where to route that connection can be made on the basis of the TLS Fingerprint.  This is because in these situations a client will perform a TCP handshake with the MiTM tool and send the first packet, the client hello, which can be fingerprinted before any other traffic occurs.  The Proxy of MiTM tool can fingerprint the TLS client and make a determination about where to connect onwards to before making a TCP handshake and forwarding the client hello packet.</p>
+
+<p>From an attackers perspective this facilitates being able to transparently forward connections, unscathed, to their original destination in the event that a client connects which is not vulnerable to any attacks being used, however vulnerable clients can be intercepted and attacked.  This allows the attacker to remain stealthy by avoiding attacking a client which could detect malicious activity, display errors and raise the alarm.  This allows the attacker to remain stealthy and transparent for a prolonged period.</p>
+
+<p>From a defenders perspective, fingerprint defined routing can be used to treat hostile or unknown client types differently to the expected clients.  Perhaps forwarding to minimal functionality, hardened, instance of the service in question, to a honeypot, or to a service which displays a message to the user.</p>
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<!-- <a class="addthis_counter addthis_pill_style"></a> -->
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+
+				</div>
+			</div>
+			<footer id="footer" class="inner">
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> - 
+
+    <a href="/about">Lee Brotherson</a>
+ |
+</footer>
+			<script src="/javascripts/slash.js"></script>
+
+
+
+
+
+
+
+
+	</div>
+</body>
+</html>
