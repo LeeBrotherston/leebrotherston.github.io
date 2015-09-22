@@ -7,7 +7,7 @@
 	<meta name="author" content="Lee Brotherson">
 
 	
-	<meta name="description" content="Background Transport Layer Security (TLS) provides transport security to all manner of connections from legitimate financial transactions to private &hellip;">
+	<meta name="description" content="Background Transport Layer Security (TLS) provides security in the form of encryption to all manner of network connections from legitimate financial &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -33,9 +33,9 @@
     
     <div class="entry-content"><h2>Background</h2>
 
-<p>Transport Layer Security (TLS) provides transport security to all manner of connections from legitimate financial transactions to private conversations and malware calling home. The inability to analyse encrypted traffic protects its users, whether they are legitimate or malicious.  Users operate under the assumption that although the existence of their session, its source and destination IP addresses can be easily observed by an eavesdropper, that the content itself is secure and unreadable without access to cryptographic keying material at one or both ends of the connection.  On the face of it this holds true, barring any configuration flaws or exploitable vulnerabilities, however it is easy to quickly and passively determine which client being used and to use this information from both attacker and defender perspectives.</p>
+<p>Transport Layer Security (TLS) provides security in the form of encryption to all manner of network connections from legitimate financial transactions, to private conversations, and malware calling home.  The inability for an eavesdropper to analyse this encrypted traffic protects its users, whether they are legitimate or malicious.  Those using TLS operate under the assumption that although the existence of their session, its source and destination IP addresses can be easily observed by an eavesdropper, that the content itself is secure and unreadable without access to cryptographic keying material at one or both ends of the connection.  On the surface this holds true, barring any configuration flaws or exploitable vulnerabilities.  However, using TLS Fingerprinting, it is easy to quickly and passively determine which client being used and then to use this information from both the attacker and the defender perspectives.</p>
 
-<p>Previously I have been able to demonstrate that certain clients could be differentiated from other network traffic.  Specifically being able to discriminate <a href="http://blog.squarelemon.com/blog/2015/02/20/superfish-detection/">SuperFish</a>, <a href="http://blog.squarelemon.com/blog/2015/02/23/privdog-detection/">PrivDog</a>, and <a href="http://blog.squarelemon.com/blog/2015/03/04/quick-and-dirty-crapware-analysis-ids-rule-creation-foo/">GeniusBox</a> from the mainstream browsers when making HTTPS connections, and generating IDS signatures <a href="http://blog.squarelemon.com/blog/2015/03/04/quick-and-dirty-crapware-analysis-ids-rule-creation-foo/">3</a> based on these findings to assist network administrators in being able to identify problematic hosts without requiring access to either endpoint.</p>
+<p>Previously I have been able to demonstrate that certain clients could be differentiated from other network traffic.  Specifically discriminating <a href="http://blog.squarelemon.com/blog/2015/02/20/superfish-detection/">SuperFish</a>, <a href="http://blog.squarelemon.com/blog/2015/02/23/privdog-detection/">PrivDog</a>, and <a href="http://blog.squarelemon.com/blog/2015/03/04/quick-and-dirty-crapware-analysis-ids-rule-creation-foo/">GeniusBox</a> from the mainstream browsers when making HTTPS connections, and generating <a href="https://github.com/LeeBrotherston/snort">IDS signatures</a> based on these findings to assist network administrators in being able to identify problematic hosts without requiring access to either endpoint.  I have now expanded this technique to improve accuracy of fingerprints, provide tools to enable others to create fingerprints, and tools to enable use by others in their own environments.</p>
 
 <h2>TLS</h2>
 
