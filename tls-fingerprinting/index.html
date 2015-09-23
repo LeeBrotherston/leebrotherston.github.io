@@ -33,13 +33,13 @@
     
     <div class="entry-content"><h2>Background</h2>
 
-<p>Transport Layer Security (TLS) provides security in the form of encryption to all manner of network connections from legitimate financial transactions, to private conversations, and malware calling home.  The inability for an eavesdropper to analyse this encrypted traffic protects its users, whether they are legitimate or malicious.  Those using TLS operate under the assumption that although the existence of their session, its source and destination IP addresses can be easily observed by an eavesdropper, that the content itself is secure and unreadable without access to cryptographic keying material at one or both ends of the connection.  On the surface this holds true, barring any configuration flaws or exploitable vulnerabilities.  However, using TLS Fingerprinting, it is easy to quickly and passively determine which client being used and then to use this information from both the attacker and the defender perspectives.</p>
+<p>Transport Layer Security (TLS) provides security in the form of encryption to all manner of network connections from legitimate financial transactions, to private conversations, and malware calling home.  The inability for an eavesdropper to analyze this encrypted traffic protects its users, whether they are legitimate or malicious.  Those using TLS operate under the assumption that although the existence of their session, its source and destination IP addresses can be easily observed by an eavesdropper, that the content itself is secure and unreadable without access to cryptographic keying material at one or both ends of the connection.  On the surface this holds true, barring any configuration flaws or exploitable vulnerabilities.  However, using TLS Fingerprinting, it is easy to quickly and passively determine which client being used and then to use this information from both the attacker and the defender perspectives.</p>
 
 <p>Previously I have been able to demonstrate that certain clients could be differentiated from other network traffic.  Specifically discriminating <a href="http://blog.squarelemon.com/blog/2015/02/20/superfish-detection/">SuperFish</a>, <a href="http://blog.squarelemon.com/blog/2015/02/23/privdog-detection/">PrivDog</a>, and <a href="http://blog.squarelemon.com/blog/2015/03/04/quick-and-dirty-crapware-analysis-ids-rule-creation-foo/">GeniusBox</a> from the mainstream browsers when making HTTPS connections, and generating <a href="https://github.com/LeeBrotherston/snort">IDS signatures</a> based on these findings to assist network administrators in being able to identify problematic hosts without requiring access to either endpoint.  I have now expanded this technique to improve accuracy of fingerprints, provide tools to enable others to create fingerprints, and tools to enable use by others in their own environments.</p>
 
 <h2>TLS</h2>
 
-<p>Prior to entering initiating encrypted communications, TLS needs to create a handshake between the client and server which is then used to select the best mutually acceptable cryptographic ciphers, compression systems, hashing algorithms, etc.  This is conducted in the clear as the method of cryptography in use has yet to be determined.  This is not problematic from the point of view of breaking cryptography, as the public exchange of private keys is a well-accepted technique; however, it does allow the opportunity to observe some behaviour which is not masked from any eavesdropper by encryption.</p>
+<p>Prior to entering initiating encrypted communications, TLS needs to create a handshake between the client and server which is then used to select the best mutually acceptable cryptographic ciphers, compression systems, hashing algorithms, etc.  This is conducted in the clear as the method of cryptography in use has yet to be determined.  This is not problematic from the point of view of breaking cryptography, as the public exchange of private keys is a well-accepted technique; however, it does allow the opportunity to observe some behavior which is not masked from any eavesdropper by encryption.</p>
 
 <p>A TLS connection will always begin with a Client Hello packet which announces to the server end of the connection the capabilities of the client, presented in preference order.  The server will send a similar packet back, a &ldquo;server hello&rdquo; describing the server capabilities in preference order.  By comparing the two packets, the client and server can determine the optimal ciphersuites, compression algorithms, etc. to use per their preferences.</p>
 
@@ -80,11 +80,11 @@
 
 <h2>Tools</h2>
 
-<p>In order to make TLS Fingerprinting consumable by the Information Security community I have released a set of open source tools, licensed under the <a href="http://www.gnu.org/licenses/">GNU Public Licence</a>, which can be found on the <a href="https://github.com/LeeBrotherston/FingerprinTLS/">FingerprinTLS GitHub responsitory</a>.  Details of the tools are as  follows.</p>
+<p>In order to make TLS Fingerprinting consumable by the Information Security community I have released a set of open source tools, licensed under the <a href="http://www.gnu.org/licenses/">GNU Public Licence</a>, which can be found on the <a href="https://github.com/LeeBrotherston/tls-fingerprinting/">FingerprinTLS GitHub responsitory</a>.  Details of the tools are as  follows.</p>
 
 <h3>FingerprinTLS</h3>
 
-<p><a href="https://github.com/LeeBrotherston/FingerprinTLS/">FingerprinTLS</a> is designed to rapidly identify known TLS connections and fingerprint unknown TLS connections.  Input is taken either via live network sniffing or reading a <a href="https://en.wikipedia.org/wiki/Pcap">PCAP</a> file.  Output for recognized connections is (currently) in human readable output and for unknown fingerprints in the JSON format used for the fingerprint definitions.</p>
+<p><a href="https://github.com/LeeBrotherston/tls-fingerprinting/">FingerprinTLS</a> is designed to rapidly identify known TLS connections and fingerprint unknown TLS connections.  Input is taken either via live network sniffing or reading a <a href="https://en.wikipedia.org/wiki/Pcap">PCAP</a> file.  Output for recognized connections is (currently) in human readable output and for unknown fingerprints in the JSON format used for the fingerprint definitions.</p>
 
 <p>Fingerprints which are generated can be exported as a C struct by Fingerprintout and compiled back into FingerprinTLS to enable detecting in future instances.</p>
 
@@ -116,6 +116,22 @@
 <p>From an attackers perspective this facilitates being able to transparently forward connections, unscathed, to their original destination in the event that a client connects which is not vulnerable to any attacks being used, however vulnerable clients can be intercepted and attacked.  This allows the attacker to remain stealthy by avoiding attacking a client which could detect malicious activity, display errors and raise the alarm.  This allows the attacker to remain stealthy and thus more likely to remain undetected for a prolonged period.</p>
 
 <p>From a defenders perspective, fingerprint defined routing can be used to treat hostile or unknown client types differently to the expected clients.  Perhaps forwarding to minimal functionality, hardened, instance of the service in question, to a honeypot, or to a service which displays a message to the user.</p>
+
+<h2>But&hellip;..</h2>
+
+<h3>Fingerprint Modification</h3>
+
+<p>The natural response for many, of course, is to look at options to modify your TLS fingerprint in order to subvert this technique.  While this is of course possible, there are some complexities which would increase the difficulty.</p>
+
+<p>To modify the fingerprint the Client Hello must be modified, which in turn means choosing to support, and not support, a number of ciphersuites and other features.  In turn this could lower the security of the client or introduce the requirement to support previously unsupported options.  Additionally the fingerprinting technique works not only on the basis of what is offered by the client in a Client Hello packet, but the order in which it does so.  Some libraries and frameworks abstract this level of detail away from the developer adding additional complexity into the process of modifying the fingerprint.</p>
+
+<h3>Fingerprint collisions</h3>
+
+<p>As with any fingerprinting technology there is scope for fingerprint collisions, that being where two different applications create the same fingerprint rendering them indistinguishable from each other.  So far in my research collisions have transpired to be that applications use a shared codebase or were embedding other technologies, such as webkit, inside the application.  From the perspective of Information Security this is most likely not a collision as these applications will exhibit the same strengths and vulnerabilities as each other.  The only loss in visibility is for intelligence purposes, however, shared frameworks typically support the &ldquo;server&rdquo; header which includes the fully qualified hostname being connected to which allows us to derive the identity of many of the services.</p>
+
+<h2>Finally</h2>
+
+<p>As with any technology, TLS Fingerprinting can evolve further.  I will continue to research this area, however community research will most likely drive larger leaps forward, and so I encourage others to take my work, provide feedback, provide signatures, fork the code, etc.  I&rsquo;m sure that this is capable of more than I have put together and I would really like to see it succeed.</p>
 </div>
 </article>
 
