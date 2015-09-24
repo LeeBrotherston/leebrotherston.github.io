@@ -4,7 +4,7 @@
   <title><![CDATA[SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-09-23T15:44:53-04:00</updated>
+  <updated>2015-09-24T14:48:04-04:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Yes, I've been quiet...]]></title>
+    <link href="http://blog.squarelemon.com/blog/2015/09/24/yes/"/>
+    <updated>2015-09-24T10:41:43-04:00</updated>
+    <id>http://blog.squarelemon.com/blog/2015/09/24/yes</id>
+    <content type="html"><![CDATA[<p>I haven&rsquo;t posted for a while, largely because I have been working on some research that I have been doing, and am  presenting at both <a href="http://www.sector.ca/Program/Sessions/Session-Details/stealthier-attacks-and-smarter-defending-with-tls-fingerprinting">SecTor</a> in a few weeks, and <a href="https://www.derbycon.com">DerbyCon</a> tomorrow.  I will be releasing some materials relating to this talk so that people who are not in attendance can obtain the information without having to listen to me on a recording, so if you are interested in TLS Fingerprinting, keep an eye out tomorrow as I will be publishing a longer than normal post with some of the technical details and tools.</p>
+
+<p>As usual, I&rsquo;m always eager to hear any feedback on my own <a href="https://twitter.com/synackpse">twitter account</a> or via the <a href="https://twitter.com/FingerprinTLS">FingerprinTLS</a> account.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MiTM'ing the MiTM'ers]]></title>
@@ -491,32 +502,6 @@ defenders and attackers rather than cryptographers.  Here&rsquo;s the abstract:<
 
 <br />
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Corporation In The Middle]]></title>
-    <link href="http://blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle/"/>
-    <updated>2014-10-29T22:59:58-04:00</updated>
-    <id>http://blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle</id>
-    <content type="html"><![CDATA[<p>A few days ago I presented my talk, &ldquo;Corporation In The Middle&rdquo; at <a href="http://sector.ca">SecTor 2014</a>.  I will be presenting an updated and truncated version of the talk at <a href="http://www.bsidesto.ca/">BSides Toronto</a> in November of this year.</p>
-
-<p>If you are interested in seeing the talk you can do so here:</p>
-
-<iframe src="http://blog.squarelemon.com//player.vimeo.com/video/110367213" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
-
-<br />
-
-
-<p>If so inclined, you can also <a href="http://www.slideshare.net/LeeBrotherston/lee-brotherston-corporation-in-the-middle">get the slides here</a>.</p>
-
-<br />
-
-
-<p>The original blurb was:
-<i>My ISP deliberately MiTM&rsquo;d my connection.  This talk discusses how they did it, how I detected what they did and what this means.  This talk covers what I learnt over three months of analysis focusing on the technology involved both on the ISP side and my own. I cover in detail how I went about identifying and mapping the ISPs hidden network components and how they modify IP connections. I will briefly cover what this means to customers of their service.  During the talk I will provide technical evidence as well as walk through how I used open source tools to unmask this Corp In The Middle attack.
-</i></p>
 ]]></content>
   </entry>
   
