@@ -80,17 +80,17 @@
 
 <h2>Tools</h2>
 
-<p>In order to make TLS Fingerprinting consumable by the Information Security community I have released a set of open source tools, licensed under the <a href="http://www.gnu.org/licenses/">GNU Public Licence</a>, which can be found on the <a href="https://github.com/LeeBrotherston/tls-fingerprinting/fingerprintls/">FingerprinTLS GitHub responsitory</a>.  Details of the tools are as  follows.</p>
+<p>In order to make TLS Fingerprinting consumable by the Information Security community I have released a set of open source tools, licensed under the <a href="http://www.gnu.org/licenses/">GNU Public Licence</a>, which can be found on the <a href="https://github.com/LeeBrotherston/tls-fingerprinting/tree/master/fingerprintls">FingerprinTLS GitHub responsitory</a>.  Details of the tools are as  follows.</p>
 
 <h3>FingerprinTLS</h3>
 
-<p><a href="https://github.com/LeeBrotherston/tls-fingerprinting/fingerprintls/">FingerprinTLS</a> is designed to rapidly identify known TLS connections and to fingerprint unknown TLS connections.  Input is taken either via live network sniffing or reading a <a href="https://en.wikipedia.org/wiki/Pcap">PCAP</a> file.  Output for recognized connections is (currently) in human readable form and for unknown fingerprints in the JSON format used for the fingerprint definitions.</p>
+<p><a href="https://github.com/LeeBrotherston/tls-fingerprinting/tree/master/fingerprintls">FingerprinTLS</a> is designed to rapidly identify known TLS connections and to fingerprint unknown TLS connections.  Input is taken either via live network sniffing or reading a <a href="https://en.wikipedia.org/wiki/Pcap">PCAP</a> file.  Output for recognized connections is (currently) in human readable form and for unknown fingerprints in the JSON format used for the fingerprint definitions.</p>
 
 <p>Fingerprints which are generated can be exported as a C struct by Fingerprintout and compiled back into FingerprinTLS to enable detecting in future instances.</p>
 
 <h3>Fingerprintout</h3>
 
-<p><a href="https://github.com/LeeBrotherston/tls-fingerprinting/scripts/">Fingerprintout</a> is a tool for managing the fingerprint definitions JSON file with regards to sanitization and export to other formats.  At the time of writing the possible outputs are:</p>
+<p><a href="https://github.com/LeeBrotherston/tls-fingerprinting/tree/master/scripts/">Fingerprintout</a> is a tool for managing the fingerprint definitions JSON file with regards to sanitization and export to other formats.  At the time of writing the possible outputs are:</p>
 
 <ul>
 <li><strong>struct</strong>: C struct format for people to include the fingerprint definitions in their own code.</li>
