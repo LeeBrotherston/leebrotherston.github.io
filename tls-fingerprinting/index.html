@@ -80,24 +80,24 @@
 
 <h2>Tools</h2>
 
-<p>In order to make TLS Fingerprinting consumable by the Information Security community I have released a set of open source tools, licensed under the <a href="http://www.gnu.org/licenses/">GNU Public Licence</a>, which can be found on the <a href="https://github.com/LeeBrotherston/tls-fingerprinting/">FingerprinTLS GitHub responsitory</a>.  Details of the tools are as  follows.</p>
+<p>In order to make TLS Fingerprinting consumable by the Information Security community I have released a set of open source tools, licensed under the <a href="http://www.gnu.org/licenses/">GNU Public Licence</a>, which can be found on the <a href="https://github.com/LeeBrotherston/tls-fingerprinting/fingerprintls/">FingerprinTLS GitHub responsitory</a>.  Details of the tools are as  follows.</p>
 
 <h3>FingerprinTLS</h3>
 
-<p><a href="https://github.com/LeeBrotherston/tls-fingerprinting/">FingerprinTLS</a> is designed to rapidly identify known TLS connections and to fingerprint unknown TLS connections.  Input is taken either via live network sniffing or reading a <a href="https://en.wikipedia.org/wiki/Pcap">PCAP</a> file.  Output for recognized connections is (currently) in human readable form and for unknown fingerprints in the JSON format used for the fingerprint definitions.</p>
+<p><a href="https://github.com/LeeBrotherston/tls-fingerprinting/fingerprintls/">FingerprinTLS</a> is designed to rapidly identify known TLS connections and to fingerprint unknown TLS connections.  Input is taken either via live network sniffing or reading a <a href="https://en.wikipedia.org/wiki/Pcap">PCAP</a> file.  Output for recognized connections is (currently) in human readable form and for unknown fingerprints in the JSON format used for the fingerprint definitions.</p>
 
 <p>Fingerprints which are generated can be exported as a C struct by Fingerprintout and compiled back into FingerprinTLS to enable detecting in future instances.</p>
 
 <h3>Fingerprintout</h3>
 
-<p>Fingerprintout is a tool for managing the fingerprint definitions JSON file with regards to sanitization and export to other formats.  At the time of writing the possible outputs are:</p>
+<p><a href="https://github.com/LeeBrotherston/tls-fingerprinting/scripts/">Fingerprintout</a> is a tool for managing the fingerprint definitions JSON file with regards to sanitization and export to other formats.  At the time of writing the possible outputs are:</p>
 
 <ul>
 <li><strong>struct</strong>: C struct format for people to include the fingerprint definitions in their own code.</li>
 <li><strong>ids</strong>: output in suricata/snort output for detection on existing IPS/IDS infrastructure.</li>
 <li><strong>idsinit</strong>: same as ids, but only for the first Client Hello packet per connection.</li>
 <li><strong>cleanse</strong>: sanitizes JSON file, producing a new JSON file.  This is intended for scrubbing data prior to publishing.</li>
-<li><strong>xkeyscore</strong>: outputs in regex.  Note, this is not as reliable as other forms because offsets are not as easily defined and so contains the liberal use of <code>".*"</code> for &ldquo;some&rdquo; offset.  DO NOT use this for serious purposes.</li>
+<li><strong>xkeyscore</strong>: outputs in regex.  Note, this is not as reliable as other forms because offsets are not as easily defined and so contains the liberal use of <code>.*</code> for &ldquo;some&rdquo; offset.  DO NOT use this for serious purposes.</li>
 </ul>
 
 
