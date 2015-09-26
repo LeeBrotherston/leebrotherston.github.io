@@ -4,7 +4,7 @@
   <title><![CDATA[SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-09-25T07:50:55-04:00</updated>
+  <updated>2015-09-25T20:28:03-04:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[TLS Fingerprinting Resources]]></title>
+    <link href="http://blog.squarelemon.com/blog/2015/09/25/tls-fingerprinting-resources/"/>
+    <updated>2015-09-25T13:00:00-04:00</updated>
+    <id>http://blog.squarelemon.com/blog/2015/09/25/tls-fingerprinting-resources</id>
+    <content type="html"><![CDATA[<p>Today I gave my talk at <a href="https://www.derbycon.com">DerbyCon</a>, &ldquo;Stealthier Attacks &amp; Smarter Defending with TLS Fingerprinting&rdquo;.  The links to all the resources are:</p>
+
+<ul>
+<li><a href="https://blog.squarelemon.com/tls-fingerprinting/">Paper / Post</a> giving a technical overview of the fingerprinting technique discussed.</li>
+<li><a href="http://www.slideshare.net/LeeBrotherston/tls-fingerprinting-stealthier-attacking-smarter-defending-derbycon">Slides</a> from the talk, which probably don&rsquo;t make much sense without the talk.</li>
+<li><a href="https://github.com/LeeBrotherston/tls-fingerprinting/">Tools</a> discussed during the talk</li>
+</ul>
+
+
+<p>Don&rsquo;t forget to join in the conversation on twitter too either to <a href="https://twitter.com/synackpse">my account</a> or the <a href="https://twitter.com/FingerprinTLS">FingerprinTLS</a> account.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Yes, I've been quiet...]]></title>
@@ -472,36 +490,6 @@ defenders and attackers rather than cryptographers.  Here&rsquo;s the abstract:<
 
 
 <p>I don&rsquo;t feel that this is going to progress anytime soon.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[BSides Toronto Video &amp; Slides]]></title>
-    <link href="http://blog.squarelemon.com/blog/2014/12/29/bsides-toronto-video-and-slides/"/>
-    <updated>2014-12-29T11:59:00-05:00</updated>
-    <id>http://blog.squarelemon.com/blog/2014/12/29/bsides-toronto-video-and-slides</id>
-    <content type="html"><![CDATA[<p>At the end of November I gave my talk, &ldquo;Corporation In The Middle [BSidesTO Edition]&rdquo; at <a href="http://bsidesto.ca">BSides Toronto 2014</a>.</p>
-
-<br />
-
-
-<p>The recording of the talk is now online and available here:<br /></p>
-
-<iframe width="560" height="315" src="http://blog.squarelemon.com//www.youtube.com/embed/_YeaYIPM-QI" frameborder="0" allowfullscreen></iframe>
-
-
-<br />
-
-
-<p>You can play along at home with the slides, here:<br /></p>
-
-<iframe src="http://blog.squarelemon.com//www.slideshare.net/slideshow/embed_code/41918170" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-
-
-<p> <div style="margin-bottom:5px"> <strong> <a href="http://blog.squarelemon.com//www.slideshare.net/LeeBrotherston/corporation-in-the-middle-bsidesto-edition" title="Corporation In The Middle - BSidesTO Edition" target="_blank">Corporation In The Middle &ndash; BSidesTO Edition</a> </strong> from <strong><a href="http://blog.squarelemon.com//www.slideshare.net/LeeBrotherston" target="_blank">Lee Brotherston</a></strong> </div></p>
-
-<br />
-
 ]]></content>
   </entry>
   
