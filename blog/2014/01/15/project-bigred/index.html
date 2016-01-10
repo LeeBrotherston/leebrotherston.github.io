@@ -1,82 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Privacy,Internet | SquareLemon]]></title>
-  <link href="http://blog.squarelemon.com/blog/categories/privacy-internet/atom.xml" rel="self"/>
-  <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-09-27T20:45:23-04:00</updated>
-  <id>http://blog.squarelemon.com/</id>
-  <author>
-    <name><![CDATA[Lee Brotherson]]></name>
-    <email><![CDATA[contact@squarelemon.com]]></email>
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Project bigRed - SquareLemon</title>
+	<meta name="author" content="Lee Brotherson">
 
-  
-  <entry>
-    <title type="html"><![CDATA[MiTM at 30,000 feet]]></title>
-    <link href="http://blog.squarelemon.com/blog/2015/01/04/mitm-at-30/"/>
-    <updated>2015-01-04T23:38:11-05:00</updated>
-    <id>http://blog.squarelemon.com/blog/2015/01/04/mitm-at-30</id>
-    <content type="html"><![CDATA[<p>In the past week I have seen a few mentions on twitter regarding <a href="http://twitter.com/gogo">Gogo Air</a> presenting fake SSL certs for YouTube to users of their in air Internet access service:<br /><!-- More --></p>
+	
+	<meta name="description" content="Introduction Along with <a
+href="https://www.rogers.com/web/Rogers.portal?_nfpb=true&_windowLabel=investor_1_1&investor_1_1_actionOverride=% &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<blockquote class="twitter-tweet" lang="en"><p>hey <a href="https://twitter.com/Gogo">@Gogo</a>, why are you issuing *.google.com certificates on your planes? <a href="http://t.co/UmpIQ2pDaU">pic.twitter.com/UmpIQ2pDaU</a></p>&mdash; Adrienne Porter Felt (@__apf__) <a href="https://twitter.com/__apf__/status/551083956326920192">January 2, 2015</a></blockquote>
+	<link href="/atom.xml" rel="alternate" title="SquareLemon" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+</head>
 
+<body>
+	<div class="container">	
 
-<script async src="http://blog.squarelemon.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-
-
-<br />
-
-
-
-
-<blockquote class="twitter-tweet" lang="en"><p>No, not OK. <a href="https://twitter.com/Gogo">@Gogo</a> please justify breaking the Internet for your paying users. Huge privacy connotations! <a href="http://t.co/AxZOPEK0oO">pic.twitter.com/AxZOPEK0oO</a></p>&mdash; Ben Hughes (@benjammingh) <a href="https://twitter.com/benjammingh/status/551589274123247616">January 4, 2015</a></blockquote>
-
-
-<script async src="http://blog.squarelemon.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-
-
-<br />
-
-
-<p>I started to wonder if they were using the same technique that I had recently been researching and discussing in my <a href="http://blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle/">Corporation in The Middle</a> talk.  Luckily for me, my friend <a href="https://twitter.com/benjammingh/">Benjammingh</a> was one of those who noticed and was currently on a Gogo flight, so I asked him to take a packetdump for analysis.<br /><br /><!-- More --></p>
-
-<p>The short summary is that this is not the same technique, in fact this looks like in-flight transparent proxying&hellip;.<br /><br /></p>
-
-<p>For one thing there is this giveaway in the http response header:<br /></p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>X-Cache: MISS from 172.19.134.2
-</span><span class='line'>X-Cache-Lookup: MISS from 172.19.134.2:3128
-</span><span class='line'>Via: 1.0 172.19.134.2:3128 (squid/2.6.STABLE14)</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<br />
-
-
-<p>This is indeed squid, quite an old install of squid, on the default port.<br /><br /></p>
-
-<p>Secondly, the TTL on all the packets was 64.  Now, most OS&rsquo;s tend to use round numbers for default TTL values (32, 64, 128).  Assuming this to be the case, this would indicate that either YouTube is exactly 64 hops away or the packets are originating from the local network segment, which would be consistent with a local (transparent) proxy.</p>
-
-<br />
-
-
-<p>It&rsquo;s hardly an in-depth analysis, but at this point it seems to be more than we have at the minute, and it would explain how they are Man in The Middle'ing the connection, the question still remains&hellip;. why?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Project bigRed]]></title>
-    <link href="http://blog.squarelemon.com/blog/2014/01/15/project-bigred/"/>
-    <updated>2014-01-15T12:20:53-05:00</updated>
-    <id>http://blog.squarelemon.com/blog/2014/01/15/project-bigred</id>
-    <content type="html"><![CDATA[<h3>Introduction</h3>
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+					<article class="post">
+	<h1 class="title">Project bigRed</h1>
+	<div class="entry-content"><h3>Introduction</h3>
 
 
 <p>Along with <a
@@ -134,7 +88,7 @@ server to the client and secondly it will mean that any further packets
 arriving from client to server will be ignored.</li>
 
 <li>The client, blissfully unaware that the connection to the server has been
-closed proceeds to send it's HTTP GET request to the web server.  Intestingly
+closed proceeds to send it&#8217;s HTTP GET request to the web server.  Intestingly
 despite the TCP connection being torn down the packet containing the HTTP
 request is blocked and never reaches the server.  It would have been ignored
 anyway assuming that the packet Rogers spoofed beat it in a race to the server,
@@ -171,7 +125,7 @@ surpression</li>
 following data was sent as the reply to my HTTP request (whitespace added to
 ease reading):</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Injected HTML/JS </span></figcaption>
+<figure class='code'><figcaption><span>Injected HTML/JS </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -198,51 +152,34 @@ ease reading):</p>
 <span class='line-number'>24</span>
 <span class='line-number'>25</span>
 <span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;&lt;</span><span class="err">/p&gt;</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;</span><span class="nx">head</span><span class="o">&gt;&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">noscript</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">http</span><span class="o">-</span><span class="nx">equiv</span><span class="o">=</span><span class="s2">&quot;refresh&quot;</span> <span class="nx">content</span><span class="o">=</span><span class="s2">&quot;0;URL=http://64.71.251.10/noscript.pl?policy=72&amp;category=ByteCap-075&amp;&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/noscript&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;&lt;</span><span class="err">/title&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">version</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">webServer</span> <span class="o">=</span> <span class="s2">&quot;http://64.71.251.10&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://64.71.251.10/ByteCap-075-EO-English/index.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/head&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">noscript</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">frameset</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">frame</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://64.71.251.10/noscript.pl?policy=72&amp;category=ByteCap-075&amp;&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/frameset&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/noscript&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">noscript</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span>
-</span><span class='line'>    <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">meta</span> <span class="nx">http</span><span class="o">-</span><span class="nx">equiv</span><span class="o">=</span><span class="s2">&quot;refresh&quot;</span> <span class="nx">content</span><span class="o">=</span><span class="s2">&quot;0;URL=http://64.71.251.10/noscript.pl?policy=72&amp;amp;category=ByteCap-075&amp;amp;&quot;</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span>
-</span><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="err">/noscript&amp;gt;</span>
-</span><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">title</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="err">/title&amp;gt;</span>
-</span><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">version</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">webServer</span> <span class="o">=</span> <span class="s2">&quot;http://64.71.251.10&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="err">/script&amp;gt;</span>
-</span><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://64.71.251.10/ByteCap-075-EO-English/index.js&quot;</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="err">/script&amp;gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">body</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;margin:0;&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="nx">Bulletin</span><span class="p">(</span><span class="s2">&quot;policy=72&amp;category=ByteCap-075&amp;&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/body&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;</span><span class="err">/head&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">noscript</span><span class="o">&gt;&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">frameset</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span>
-</span><span class='line'>    <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">frame</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://64.71.251.10/noscript.pl?policy=72&amp;amp;category=ByteCap-075&amp;amp;&quot;</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span>
-</span><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="err">/frameset&amp;gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;</span><span class="err">/noscript&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;</span><span class="nx">body</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;margin:0;&quot;</span><span class="o">&gt;&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span>
-</span><span class='line'>    <span class="nx">Bulletin</span><span class="p">(</span><span class="s2">&quot;policy=72&amp;amp;category=ByteCap-075&amp;amp;&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="err">/script&amp;gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;</span><span class="err">/body&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;</span><span class="err">/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>At this point there are a few things we should note that because of the way
 this is injected the browser believes that it is recieving data from the
@@ -336,7 +273,7 @@ presumably all the time.<br /><br />
 ✔ Rogers appears to be an equal opportunities injector, inserting banners (and
 logging URLs) for a wide range of topics.<br /><br /></p>
 
-<h3>So, this interception thing...</h3>
+<h3>So, this interception thing&#8230;</h3>
 
 
 <p>I started to dig into how Rogers could be intercepting traffic and I noticed
@@ -382,7 +319,41 @@ perform this interception.  What else do they use this network for?  What
 have I missed?<br /><br /></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-</feed>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<!-- <a class="addthis_counter addthis_pill_style"></a> -->
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+				</div>
+			</div>
+			<footer id="footer" class="inner">
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> - 
+
+    <a href="/about">Lee Brotherson</a>
+ |
+</footer>
+			<script src="/javascripts/slash.js"></script>
+
+
+
+
+
+
+
+
+	</div>
+</body>
+</html>
