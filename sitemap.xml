@@ -1,10 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://blog.squarelemon.com/blog/2014/01/15/project-bigred/</loc>
-        <lastmod>2015-01-05T14:21:33-05:00</lastmod>
-    </url>
-    <url>
         <loc>http://blog.squarelemon.com/blog/2014/05/24/sector-2014/</loc>
         <lastmod>2015-01-05T14:21:33-05:00</lastmod>
     </url>
@@ -17,12 +13,6 @@
     <url>
         <loc>http://blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle/</loc>
         <lastmod>2015-01-05T14:21:33-05:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://blog.squarelemon.com/blog/2014/11/24/corporation-in-the-middle-blog-edition/
-        </loc>
-        <lastmod>2015-02-15T21:50:36-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.squarelemon.com/blog/2014/12/29/bsides-toronto-video-and-slides/</loc>
@@ -121,24 +111,28 @@
         <lastmod>2015-09-25T09:45:46-04:00</lastmod>
     </url>
     <url>
+        <loc>http://blog.squarelemon.com/blog/2016/01/09/things-are-coming-dot-dot-dot/</loc>
+        <lastmod>2016-01-09T23:47:00-05:00</lastmod>
+    </url>
+    <url>
         <loc>http://blog.squarelemon.com/about/</loc>
         <lastmod>2015-02-13T16:28:15-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.squarelemon.com/archives/</loc>
-        <lastmod>2015-09-25T09:45:46-04:00</lastmod>
+        <lastmod>2016-01-09T23:47:00-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.squarelemon.com/blog/archives/</loc>
-        <lastmod>2015-09-25T09:45:46-04:00</lastmod>
+        <lastmod>2016-01-09T23:47:00-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.squarelemon.com/blog/</loc>
-        <lastmod>2015-09-25T09:45:46-04:00</lastmod>
+        <lastmod>2016-01-09T23:47:00-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.squarelemon.com/</loc>
-        <lastmod>2015-09-25T09:45:46-04:00</lastmod>
+        <lastmod>2016-01-09T23:47:00-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.squarelemon.com/press/</loc>

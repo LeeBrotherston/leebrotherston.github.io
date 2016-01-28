@@ -4,7 +4,7 @@
   <title><![CDATA[SquareLemon]]></title>
   <link href="http://blog.squarelemon.com/atom.xml" rel="self"/>
   <link href="http://blog.squarelemon.com/"/>
-  <updated>2015-09-27T20:45:23-04:00</updated>
+  <updated>2016-01-28T17:08:07-05:00</updated>
   <id>http://blog.squarelemon.com/</id>
   <author>
     <name><![CDATA[Lee Brotherson]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Things are coming...]]></title>
+    <link href="http://blog.squarelemon.com/blog/2016/01/09/things-are-coming-dot-dot-dot/"/>
+    <updated>2016-01-09T23:07:24-05:00</updated>
+    <id>http://blog.squarelemon.com/blog/2016/01/09/things-are-coming-dot-dot-dot</id>
+    <content type="html"><![CDATA[<p>I realise that I have not posted for a while, so I just wanted to drop a quick mini-post&#8217;ette to say that I have been working hard on a number of things to do with my <a href="http://blog.squarelemon.com/tls-fingerprinting/">TLS Fingerprinting</a> side project.  If you keep track of my <a href="https://github.com/LeeBrotherston/tls-fingerprinting/">GitHub page</a> you&rsquo;ll probably see the fruits of my labour first.<br /></p>
+
+<br />
+
+
+<p>I&rsquo;m planning on creating a number of posts on using the <a href="https://github.com/LeeBrotherston/tls-fingerprinting/tree/master/fingerprintls">FingerPrinTLS tool</a> once I have a few more key items in.  Since I spoke at DerbyCon and SecTorCA I have introduced a number of new features, including:</p>
+
+<ul>
+<li>802.1Q support</li>
+<li>IPv6 support</li>
+<li>Privilege dropping</li>
+<li>Timestamps to output</li>
+<li>Dynamically generate new signatures from unknown connections</li>
+<li>Binary fingerprint &ldquo;database&rdquo; file as opposed to compiled in fingerprints</li>
+<li>Cleanups (but more is needed)</li>
+<li>Database search optimisations</li>
+</ul>
+
+
+<p>I&rsquo;m currently working on a few other things (threading, code cleanup, optimisations, etc) then I&rsquo;ll drop some more real-world-useful tutorials.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[TLS Fingerprinting Resources]]></title>
@@ -454,42 +482,6 @@ defenders and attackers rather than cryptographers.  Here&rsquo;s the abstract:<
 
 
 <p>It&rsquo;s hardly an in-depth analysis, but at this point it seems to be more than we have at the minute, and it would explain how they are Man in The Middle&#8217;ing the connection, the question still remains&hellip;. why?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[No we don't]]></title>
-    <link href="http://blog.squarelemon.com/blog/2015/01/02/no-we-dont/"/>
-    <updated>2015-01-02T10:00:00-05:00</updated>
-    <id>http://blog.squarelemon.com/blog/2015/01/02/no-we-dont</id>
-    <content type="html"><![CDATA[<p>I just got a festive present from my ISP, <a href="http://www.rogers.com">Rogers</a>.<br /><br /></p>
-
-<p>Following my <a href="http://blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle/">recent <a href="http://blog.squarelemon.com/blog/2014/12/24/bsides-toronto-video-and-slides/">talks</a> regarding ISP packet injection/interception and data collection I wrote to the privacy officer at Rogers and asked, under PIPEDA, that I be supplied all information regarding my account, including any information that they have gathered such as URLs of sites visited, etc.<br /></p>
-
-<br />
-
-
-<p>I got a fairly standard response which said that they did not collect any such data, to which I replied:<!-- More --></p>
-
-<br />
-
-
-<blockquote><p>Hi,</p><p>I recently sent a letter to you asking for details of data that Rogers hold on me as required by PIPEDA.  As expected you, or someone in your department, kindly replied.  Thank you!</p><p>Most of it made sense however I did note that there was one area in particular that is inaccurate/untrue, specifically your statement &#8220;We do not collect the IP addresses or the domain names of the sites that you have visited or the time, dates and port numbers&#8221;.  I understand it is entirely possible that this was not deliberate and it&#8217;s more likely that you are unaware of some of the data that Rogers holds, nonetheless I thought that I should mention this so that this mistake is not replicated in the future placing you in breach of PIPEDA.</p><p>To provide you some insight, when you insert consumer messaging into webpages, such as the &#8220;you have exceeded 75% of your bandwidth allowance&#8230;&#8221; message, you use a system called the Bulletin System manufactured by Perftech to do so.  Putting aside the legality of this tool (I believe this breaks the Telecommunications Act) for a moment, you should note that this tool tracks user web browsing behavior (other than encrypted sessions) and keeps a history of the past 30 days tied to user account, irrespective of if that user is receiving any messaging at the time or not.</p><p>If it helps you to track down this system, one of it&#8217;s nodes (REDACTED) is currently live on the IP REDACTED within your network.</p><p>If you would like further information on this I have a sizeable amount of documentation and evidence to support this.</p><p>Please feel free to come back to me if you have any questions or queries.</p><p>Thanks</p><p>Lee</p></blockquote>
-
-
-
-
-<br /><br />
-
-
-<p>Their response?<br /><br /></p>
-
-<p><img src="http://blog.squarelemon.com/images/corp_in_the_middle/rogers_letter_update.jpeg"></p>
-
-<br /><br />
-
-
-<p>I don&rsquo;t feel that this is going to progress anytime soon.</p>
 ]]></content>
   </entry>
   

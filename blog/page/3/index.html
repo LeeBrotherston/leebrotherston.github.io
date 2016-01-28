@@ -7,7 +7,7 @@
 	<meta name="author" content="Lee Brotherson">
 
 	
-	<meta name="description" content="At the end of November I gave my talk, &ldquo;Corporation In The Middle [BSidesTO Edition]&rdquo; at BSides Toronto 2014. The recording of the talk &hellip;">
+	<meta name="description" content="I just got a festive present from my ISP, Rogers. Following my recent talks regarding ISP packet injection/interception and data collection I wrote &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -28,6 +28,40 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 					
+
+
+    <article class="post">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-02T10:00:00-05:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2015</time></div>
+		
+	</div>
+	<h1 class="title"><a href="/blog/2015/01/02/no-we-dont/">No We Don&#8217;t</a></h1>
+	<div class="entry-content">
+		<p>I just got a festive present from my ISP, <a href="http://www.rogers.com">Rogers</a>.<br /><br /></p>
+
+<p>Following my <a href="http://blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle/">recent <a href="http://blog.squarelemon.com/blog/2014/12/24/bsides-toronto-video-and-slides/">talks</a> regarding ISP packet injection/interception and data collection I wrote to the privacy officer at Rogers and asked, under PIPEDA, that I be supplied all information regarding my account, including any information that they have gathered such as URLs of sites visited, etc.<br /></p>
+
+<br />
+
+
+<p>I got a fairly standard response which said that they did not collect any such data, to which I replied:
+		
+		<a href="/blog/2015/01/02/no-we-dont/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post">
@@ -71,175 +105,6 @@
 
 <br />
 
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-11-24T22:22:19-05:00" pubdate data-updated="true">Nov 24<span>th</span>, 2014</time></div>
-		
-	</div>
-	<h1 class="title"><a href="/blog/2014/11/24/corporation-in-the-middle-blog-edition/">Corporation in the Middle Blog Edition</a></h1>
-	<div class="entry-content">
-		<p>I recently gave a talk entitled <a href="/blog/2014/10/29/corporation-in-the-middle/">Corporation In The Middle</a>.  This post is a summary for the benefit of people who don&rsquo;t want to listen to the recording or try to make sense of my <a href="http://www.slideshare.net/LeeBrotherston/lee-brotherston-corporation-in-the-middle">slides</a> without the commentary.</p>
-
-<h3>Background</h3>
-
-
-<p>Towards the end of 2013 I noticed that my ISP was inserting banners into webpages to notify me when I consumed 75% or more of my monthly bandwidth allowance.  Nothing suspicious you may think, it is after all a perfectly reasonable message to relay.  However it is not the content of the message which concerns me, it was how they were being injected into the webpage that concerned me.  When I started to work out how the banners were injected I found out that this system is far more troubling than I had at first envisaged.</p>
-
-<p>This post represents a technical(ish) summary of some of the key findings I made whilst investigating.  If you would like a lengthier explanation, then you can listen to the recording from SecTor <a href="http://2014.video.sector.ca/video/110367213">here</a>.  If you would like a more detailed conversation you can find me on <a href="https://twitter.com/synackpse">Twitter</a>.</p>
-
-<h3>Injection Technique</h3>
-
-
-<p>How are the banners injected?  The first 2 clues present themselves when you see a page which has had a banner injected:<br /><br />
-<img src="/images/corp_in_the_middle/inject_site.png"></p>
-
-<br />
-
-
-<p>Note that the URL has not been modified, also note that in addition to the banner, the originally requested content successfully loads below.  Both of these points are important to understanding the technical aspects of how this works, we will come back to them later.</p>
-
-<br /><br />
-
-
-<p>I wanted to investigate how the banner was being introduced in the first place, the URL would suggest that this is not as simple as an HTTP redirect to another page, this would cause the display of a new URL in the address bar.  Testing this theory was simple, use enough bandwidth that I am due to see some 75% usage warning banners and then connect to my own webserver being sure to packet capture both ends of the connection; one directly on the webserver and another on an ethertap connected to the back of my ISP provided router.<br />
-By comparing the two packet captures we can see that following a 3-way TCP handshake the browser sends an HTTP request which never arrives at the webserver, presumably supressed by something in the network.  Immediately a RST/PSH/ACK is sent to the webserver with the packet headers spoofed to appear to come from my client (complete with correct source port, sequence number, etc); this has the effect of closing the connection on the webserver.  Note that a RST is used rather than a FIN, so that the webserver does not send any reply packets which may need to be dealt with.  Finally a HTTP response is sent to the client which is spoofed to appear to be from the webserver (once again with correct port numbers, sequence numbers, etc):<br /><br />
-<img src="/images/corp_in_the_middle/slide12.png"></p>
-
-<br />
-
-
-<p>Let me just repeat a couple of key points here:</p>
-
-<ul>
-<li>They supressed a valid HTTP packet from me</li>
-<li>They spoofed a packet from me</li>
-<li>They spoofed a valid response to me</li>
-</ul>
-
-
-<p>As I&rsquo;m sure you have already guessed, the spoofed HTTP response packet contained the injected banner.  Actually it contained a page with javascript or an iframe (if the browser has javascript disabled), but you get the idea.  This however, is only the beginning of the story.</p>
-
-<h3>TCP Triggering</h3>
-
-
-<p>Next on my list was to determine how this is triggered at a packet level.  This is really easy, use a host based firewall to drop various types of packets and observe how this changes the injection.  By making several connections blocking each host from sending each portion of the 3-way handshake I noted that at no point did an injection attempt occur, it looks like the TCP session is being tracked and injection only occurs after the HTTP request is sent, which makes sense as we already know whatever device this is knows port numbers, sequence numbers, etc.</p>
-
-<h3>&#8220;Interceptability&#8221; and Retention</h3>
-
-
-<p>Remember at the beginning of this post I mentioned that the originally requested content successfully loads under the banner?  Well, let&rsquo;s discuss that.</p>
-
-<br />
-
-
-<p>I noted that the system being used injects on pages which return the text/html content-type.  It never attempts images, css, xml or anything else that would cause problems.  It&rsquo;s also sensible enough to spot transcations which use HTTP but are not web browsing (such as non-browser apps calling home for updates and such like).  But what does that mean?  That means that the system which is injecting packets has some sort of concept of what is &ldquo;injectable&rdquo; and what is not.  The part that concerns me about this is that if you observe a normal HTTP transaction&hellip;<br />
-<img src="/images/corp_in_the_middle/slide22.png"><br />
-&hellip; you will notice that HTTP response, which includes the content-type occurs at a point <u>after</u> the decision to inject has already been made.  What does this mean?  It means that knowledge of the content type is available prior to the request being made (this cannot be inferred by the file extension on the URL).</p>
-
-<br />
-
-
-<p>This prompted me to remember something else that I had noticed.  When pages were being injected some pages, pages which I visited regularly would be instantly injected with the banner.  Other times pages which I had not visited would be injected on the second visit, even sites which would appear in any database created by cross-subscriber data (cisco.com, microsoft.com, amazon.com, etc).  This led me to believe that my connection was being monitored and the URLs and their associated content-type was being logged to use when the time comes to inject a webpage.</p>
-
-<br />
-
-
-<p>The test is simple, setup a web site where any URL rewrites to the same page, allowing me to create infinite unique URLs.  I would visit the webpage multiple times per day (whislt under my 75% bandwidth usage) using a unique URL each time and logging the exact time and date of each.  I would then drive my bandwidth usage to over 75% and revisit each of the URLs in turn, if a URL injected straight away I could assume that it is in the database, if not it would be outside of the database.</p>
-
-<br />
-
-
-<p>I performed this experiment twice (ok four times, but we&rsquo;ll come back to that) once normally and once with the site being restricted by .htaccess and no public DNS, just an /etc/hosts entry; thus ruling out the possibility of some kind of out of band indexing.</p>
-
-<br />
-
-
-<p>The result?  Browser history is retained for <b>30 days</b>.  That seems like an awfully long time to retain what is essentially my entire households browser history, just to insert bandwidth usage notifications!</p>
-
-<br />
-
-
-<p>Going back a step, you notice that I said I did this 4 times.  This is because my original webpage was this:</p>
-
-<figure class='code'><figcaption><span>My HTML Attempt #1 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'><span class="nt">&lt;head&gt;</span>
-</span><span class='line'><span class="nt">&lt;title&gt;</span>Oh Hai<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'><span class="nt">&lt;/head&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<br />
-
-
-<p>Which did not work.  This, however, did:</p>
-
-<figure class='code'><figcaption><span>My HTML Attempt #2 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!doctype html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'><span class="nt">&lt;head&gt;</span>
-</span><span class='line'><span class="nt">&lt;title&gt;</span>Oh Hai<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'><span class="nt">&lt;/head&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<br />
-
-
-<p>What does this mean?  It means that not only is the content-type being checked, some unknown portion of the document <b>content</b> is being collected also.  Let&rsquo;s recap again:</p>
-
-<ul><li>Packet supression, spoofing and spoofing</li>
-<li>30 day retention of browsing history</li>
-<li>Inspection of Content-Type</li>
-<li>Inspection of document content</li>
-</ul>
-
-
-
-
-<h3>Detection</h3>
-
-
-<p>With this taking place within the ISP detection can be troublesome, however I have noted a few things which can be used to detect such activities.  Firstly the spoofed HTTP response never has the Do Not Fragment bit set and the TCP window size is explictly set to 1.  This combination is fairly unique, though by no means a guarantee that injection is happening.  If you want to try this out for yourself you can try the following:</p>
-
-<p>tcpdump: <code style="font: courier;">ip[6] = 0 and tcp[14:2] = 1</code><br />
-wireshark: <code style="font: courier;">tcp.window_size_value eq 1 and ip.flags.df == 0</code><br />
-snort: <code style="font: courier;">alert tcp $EXTERNAL_NET any &ndash;> $HOME_NET any (msg:&ldquo;INJECTION suspected TCP injection&rdquo;; flow:stateless; window:1; fragbits:!D; sid:31337)</code><br /></p>
-
-<p>I have personally found a 100% success and 0% false positive rate, YMMV of course.<br /></p>
 
 		
 		
@@ -357,43 +222,6 @@ snort: <code style="font: courier;">alert tcp $EXTERNAL_NET any &ndash;> $HOME_N
 
 		
 		
-	</div>
-
-</article>
-
-
-    <article class="post">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-15T12:20:53-05:00" pubdate data-updated="true">Jan 15<span>th</span>, 2014</time></div>
-		
-	</div>
-	<h1 class="title"><a href="/blog/2014/01/15/project-bigred/">Project bigRed</a></h1>
-	<div class="entry-content">
-		<h3>Introduction</h3>
-
-
-<p>Along with <a
-href="https://www.rogers.com/web/Rogers.portal?_nfpb=true&_windowLabel=investor_1_1&investor_1_1_actionOverride=%2Fportlets%2Fconsumer%2Finvestor%2FshowNewsDetail&investor_1_1yearInSelection=2014&investor_1_1BusiUnit=Wireless&investor_1_1NewsID=2110245869&investor_1_1selectedPageIndex=0&investor_1_1fromNewReleasePage=Wireless&_pageLabel=IR_LANDING">circa
-1,948,000 other Canadian households</a> I use Rogers to provide my Internet
-connection.  I had seen reports that Rogers had inserted
-banners onto the top of webpages to notify users of new Terms &amp; Conditions or
-that they were approaching their bandwidth limit for the month.  I had not
-however seen any documents detailing how they were doing this, so I went
-looking and found more than I was looking for.
-		
-		<a href="/blog/2014/01/15/project-bigred/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

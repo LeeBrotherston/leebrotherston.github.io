@@ -7,7 +7,7 @@
 	<meta name="author" content="Lee Brotherson">
 
 	
-	<meta name="description" content="Today I gave my talk at DerbyCon, &ldquo;Stealthier Attacks &amp; Smarter Defending with TLS Fingerprinting&rdquo;. The links to all the resources &hellip;">
+	<meta name="description" content="I realise that I have not posted for a while, so I just wanted to drop a quick mini-post&#8217;ette to say that I have been working hard on a number &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -28,6 +28,53 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 					
+
+
+    <article class="post">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-01-09T23:07:24-05:00" pubdate data-updated="true">Jan 9<span>th</span>, 2016</time></div>
+		
+	</div>
+	<h1 class="title"><a href="/blog/2016/01/09/things-are-coming-dot-dot-dot/">Things Are Coming&#8230;</a></h1>
+	<div class="entry-content">
+		<p>I realise that I have not posted for a while, so I just wanted to drop a quick mini-post&#8217;ette to say that I have been working hard on a number of things to do with my <a href="/tls-fingerprinting/">TLS Fingerprinting</a> side project.  If you keep track of my <a href="https://github.com/LeeBrotherston/tls-fingerprinting/">GitHub page</a> you&rsquo;ll probably see the fruits of my labour first.<br /></p>
+
+<br />
+
+
+<p>I&rsquo;m planning on creating a number of posts on using the <a href="https://github.com/LeeBrotherston/tls-fingerprinting/tree/master/fingerprintls">FingerPrinTLS tool</a> once I have a few more key items in.  Since I spoke at DerbyCon and SecTorCA I have introduced a number of new features, including:</p>
+
+<ul>
+<li>802.1Q support</li>
+<li>IPv6 support</li>
+<li>Privilege dropping</li>
+<li>Timestamps to output</li>
+<li>Dynamically generate new signatures from unknown connections</li>
+<li>Binary fingerprint &ldquo;database&rdquo; file as opposed to compiled in fingerprints</li>
+<li>Cleanups (but more is needed)</li>
+<li>Database search optimisations</li>
+</ul>
+
+
+<p>I&rsquo;m currently working on a few other things (threading, code cleanup, optimisations, etc) then I&rsquo;ll drop some more real-world-useful tutorials.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post">
@@ -379,33 +426,6 @@ defenders and attackers rather than cryptographers.  Here&rsquo;s the abstract:<
 <p>In those posts I mentioned that CipherSuite fingerprinting was the key to creating the rules, however I didn&rsquo;t give a very comprehensive technical blow-by-blow.  So, now I have a new rule to add having noticed another application Man in the Middle&#8217;ing browsers (<a href="http://geniusbox.net/">GeniusBox</a>) using the same technique, it seems like an apt time to write up what I have been doing in a more useful way.
 		
 		<a href="/blog/2015/03/04/quick-and-dirty-crapware-analysis-ids-rule-creation-foo/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-02-23T14:42:07-05:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2015</time></div>
-		
-	</div>
-	<h1 class="title"><a href="/blog/2015/02/23/privdog-detection/">PrivDog Detection</a></h1>
-	<div class="entry-content">
-		<p>In much the same way as I was <a href="http://blog.squarelemon.com/blog/2015/02/20/superfish-detection/">able to detect hosts infected with SuperFish</a> by profiling the changes in Cipher Suites used in their SSL connections (by virtue of SuperFish essentially having it&rsquo;s own SSL client) I have been able to create a fingerprint for PrivDog.  For those who are interested, the ciphersuites used by the PrivDog client are:
-		
-		<a href="/blog/2015/02/23/privdog-detection/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
